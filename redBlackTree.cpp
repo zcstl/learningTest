@@ -1,3 +1,9 @@
+/***
+ *from wikipedia
+ *annotated by zcszcs
+ *
+ *
+ * ***/
 #define BLACK 1
 #define RED 0
 
