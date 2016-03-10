@@ -5,8 +5,10 @@ using namespace std;
 
 int main()
 {
-    zcs::SingleName sn;
-    vector<int> nums={6,1,11,1,2,2,5,5,6};
-    int res=sn.singleNumber(nums);
+    zcs::Leet153 sn;
+    vector<int> nums={2,3,1};
+    int res=sn.findMin(nums);
+    //std::string str((res==1)?"yes":"no");
     cout<<res<<endl;
+
 }
