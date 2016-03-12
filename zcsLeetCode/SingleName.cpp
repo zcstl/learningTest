@@ -1,5 +1,78 @@
 #include "SingleName.h"
 #include <iostream>
+#include <stack>
+
+/************************************************/
+/**337. House Robber III*************************/
+/************************************************/
+int zcs::Leet337::rob(TreeNode* root)
+{
+    //该问题即树的breadth first搜索
+    //自己的实现,未参考任何b-f算法
+    //实现思路:通过奇数栈,偶数栈分别保存depth为奇数或偶数的node
+    //然后for循环分别出栈入栈分别计算总和
+    //但题意是求不相邻的层值的和的最大值
+    //广度优先搜索,求得每层的节点和,得到一个数组,求不相邻的值的最大组合
+
+    //root为NULL
+    if(root==nullptr)
+        return 0;
+
+    std::vector<int> results;
+    std::stack<TreeNode *> oddStack;
+    std::stack<TreeNode *> evenStack;
+    evenStack.push(root);
+    int cycleCount=0;
+    int oddTotal=0;
+    int evenTotal=0;
+    TreeNode* tmp;
+    while(!oddStack.empty()||!evenStack.empty())
+    {
+        if (cycleCount==0)
+        {
+            while(!evenStack.empty())
+            {
+                //(evenStack.top()).val; error, operator.没有相关的重载,右操作数为*,需解引用 **
+                //(evenStack.top())->val;
+                //(*evenStack.top()).val;
+                //.运算符为成员运算符, ->会将指针解引用
+                tmp=evenStack.top();
+                evenTotal+=tmp->val;
+                //空指针也会占一栈,而不是被忽略,毕竟空指针也是个有内存的存在**
+                if(tmp->left!=nullptr)
+                    oddStack.push(tmp->left);
+                if(tmp->right!=nullptr)
+                    oddStack.push(tmp->right);
+                evenStack.pop();
+            }
+            cycleCount=1;
+            results.insert(results.end(),evenTotal);
+            evenTotal=0;
+        }
+        else
+        {
+            while(!oddStack.empty())
+            {
+                tmp=oddStack.top();
+                oddTotal+=tmp->val;
+                if(tmp->left!=nullptr)
+                    evenStack.push(tmp->left);
+                if(tmp->right!=nullptr)
+                    evenStack.push(tmp->right);
+                oddStack.pop();
+            }
+            cycleCount=0;
+            results.insert(results.end(),oddTotal);
+            oddTotal=0;
+        }
+    }
+    for(auto tmp=results.cbegin();tmp<=results.cend();++tmp)
+        std::cout<<*tmp<<std::endl;
+    return (oddTotal>evenTotal)?oddTotal:evenTotal;
+
+}
+
+
 
 /************************************************/
 /**153. Find Minimum in Rotated Sorted Array*****/

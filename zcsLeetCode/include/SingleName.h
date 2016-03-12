@@ -32,5 +32,20 @@ namespace zcs{
     {
         int findMin(std::vector<int>&);
     };
+
+    class Leet337
+    {
+        private:
+            struct TreeNode
+            {
+                int val;
+                TreeNode *left;
+                TreeNode *right;
+                TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+            };
+        public:
+            int rob(TreeNode*);
+
+    };
 }
 #endif // SINGLENAME_H
