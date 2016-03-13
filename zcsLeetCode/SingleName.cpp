@@ -1,23 +1,83 @@
 #include "SingleName.h"
 #include <iostream>
 #include <stack>
-
+#include <algorithm>
+#include <memory.h>
 /************************************************/
 /**337. House Robber III*************************/
-/************************************************/
+/**note: 动态规划, 树的后序遍历与广度优先搜索********/
 int zcs::Leet337::rob(TreeNode* root)
 {
+    /**分类:求出每个类的max,最后得出全局的max --> 动态规划+树的后序遍历**/
+    if(root==nullptr)
+        return 0;
+    int* val;
+    val=getMaxVal(root);
+    int result=(val[0]>val[1])?val[0]:val[1];
+    free(val);
+    return result;
+}
+
+int* zcs::Leet337::getMaxVal(TreeNode* node)
+{
+    int* leftVal=(int*)malloc(2*sizeof(int));
+    memset(leftVal,0,2*sizeof(int));
+    int* rightVal=(int*)malloc(2*sizeof(int));
+    memset(rightVal,0,2*sizeof(int));
+    int* parentVal=(int*)malloc(2*sizeof(int));
+    memset(parentVal,0,2*sizeof(int));
+    if (node->left!=nullptr)
+    {
+        int* tmpValPtr;
+        tmpValPtr=getMaxVal(node->left);
+        leftVal[0]=*tmpValPtr;
+        leftVal[1]=*(tmpValPtr+1);
+        free(tmpValPtr);
+    }
+
+    if (node->right!=nullptr)
+    {
+        int* tmpValPtr;
+        tmpValPtr=getMaxVal(node->right);
+        rightVal[0]=*tmpValPtr;
+        rightVal[1]=*(tmpValPtr+1);
+        free(tmpValPtr);
+    }
+
+    if ((node->left==nullptr)&&(node->right==nullptr))
+    {
+        parentVal[0]=0;
+        parentVal[1]=node->val;
+        free(leftVal);
+        free(rightVal);
+        return parentVal;
+    }
+    parentVal[0]=std::max(leftVal[0],leftVal[1])+std::max(rightVal[0],rightVal[1]);
+    parentVal[1]=leftVal[0]+rightVal[0]+node->val;
+    free(leftVal);
+    free(rightVal);
+    return parentVal;
+}
+
+
+
+
+int zcs::Leet337::robNote(TreeNode* root)
+{
+    /**题意理解错了**/
     //该问题即树的breadth first搜索
     //自己的实现,未参考任何b-f算法
     //实现思路:通过奇数栈,偶数栈分别保存depth为奇数或偶数的node
     //然后for循环分别出栈入栈分别计算总和
     //但题意是求不相邻的层值的和的最大值
     //广度优先搜索,求得每层的节点和,得到一个数组,求不相邻的值的最大组合
+    /**树的breadth first search**/
+    /**动态规划**/ //m[i]=max(a[i]+m[i+2],m[i+1]),a为数组,m[i]为从a[i]算起的最大不相邻子数组
 
+    //
     //root为NULL
     if(root==nullptr)
         return 0;
-
     std::vector<int> results;
     std::stack<TreeNode *> oddStack;
     std::stack<TreeNode *> evenStack;
@@ -66,10 +126,32 @@ int zcs::Leet337::rob(TreeNode* root)
             oddTotal=0;
         }
     }
-    for(auto tmp=results.cbegin();tmp<=results.cend();++tmp)
-        std::cout<<*tmp<<std::endl;
-    return (oddTotal>evenTotal)?oddTotal:evenTotal;
+    //vector to array
+    int resultsSize=results.size();
+    int money[resultsSize];
+    auto tmp1=results.cbegin();
+    for(int i=0;tmp1<results.cend();++i,++tmp1)
+    {
+            std::cout<<*tmp1<<std::endl;
+            money[i]=*tmp1;
+    }
+    //
+    return dynamicPro(money,resultsSize);
 
+}
+
+int zcs::Leet337::dynamicPro(int* money,int resultsSize)
+{
+    int m1=money[resultsSize-1];
+    int m2=(money[resultsSize-2]>money[resultsSize-1])?money[resultsSize-2]:money[resultsSize-1];
+    int tmp2=0;
+    for(int i=resultsSize-3;i>=0;--i)
+    {
+        tmp2=m1;
+        m1=((money[i]+m2)>m1)?(money[i]+m2):m1;
+        m2=tmp2;
+    }
+    return m1;
 }
 
 

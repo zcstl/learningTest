@@ -1,0 +1,49 @@
+# depslib dependency file v1.0
+1449149045 source:/home/zcs/software/NB/varBinsBWT/bwt.c
+	<stdio.h>
+	<stdlib.h>
+	<memory.h>
+	<string.h>
+	"bwt.h"
+
+1449149016 /home/zcs/software/NB/varBinsBWT/bwt.h
+
+1450327633 source:/home/zcs/software/NB/varBinsBWT/main.c
+	<stdio.h>
+	<stdlib.h>
+	<memory.h>
+	<string.h>
+	"bwtZCS.h"
+	"genoZCS.h"
+	"varBinsZCS.h"
+
+1450268162 source:/home/zcs/software/NB/varBinsBWT/bwtZCS.c
+	<stdio.h>
+	<stdlib.h>
+	<memory.h>
+	<string.h>
+	"bwtZCS.h"
+	"genoZCS.h"
+
+1450327622 source:/home/zcs/software/NB/varBinsBWT/genoZCS.c
+	<stdio.h>
+	<stdlib.h>
+	<memory.h>
+	<string.h>
+	"genoZCS.h"
+
+1450327609 /home/zcs/software/NB/varBinsBWT/genoZCS.h
+
+1450268181 /home/zcs/software/NB/varBinsBWT/bwtZCS.h
+
+1450267620 source:/home/zcs/software/NB/varBinsBWT/varBinsZCS.c
+	<stdio.h>
+	<stdlib.h>
+	<memory.h>
+	<string.h>
+	"bwtZCS.h"
+	"genoZCS.h"
+	"varBinsZCS.h"
+
+1449564132 /home/zcs/software/NB/varBinsBWT/varBinsZCS.h
+

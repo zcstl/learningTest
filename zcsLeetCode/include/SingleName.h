@@ -43,7 +43,22 @@ namespace zcs{
                 TreeNode *right;
                 TreeNode(int x) : val(x), left(NULL), right(NULL) {}
             };
+
+            //
+            int dynamicPro(int*,int);
+
+            //
+            int* getMaxVal(TreeNode*);
+            /**
+            int parentVal[2]={0,0};
+            int leftVal[2]={0,0};
+            int rightVal[2]={0,0};
+            int* tmpValPtr;  该指针也许在递归中被共用不会出错,但这种精细不是个好习惯或没有必要,容易出错
+            原以这种成员变量保存递归数据,但递归时发生相互覆盖,故还是堆中存放
+            **/
+
         public:
+            int robNote(TreeNode*);
             int rob(TreeNode*);
 
     };

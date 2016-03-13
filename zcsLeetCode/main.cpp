@@ -1,14 +1,17 @@
 #include <iostream>
 #include <SingleName.h>
 #include <vector>
+#include <memory.h>
+
 using namespace std;
 
 int main()
 {
-    zcs::Leet153 sn;
-    vector<int> nums={2,3,1};
-    int res=sn.findMin(nums);
-    //std::string str((res==1)?"yes":"no");
-    cout<<res<<endl;
+    int* parentVal=(int*)malloc(2*sizeof(int));
+    memset(parentVal,0,2*sizeof(int));
+    parentVal[0]=1;
+    parentVal[1]=2;
+    cout<<parentVal[0]<<endl;
+    cout<<parentVal[1]<<endl;
 
 }

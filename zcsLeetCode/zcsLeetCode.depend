@@ -1,13 +1,18 @@
 # depslib dependency file v1.0
-1457613430 source:/home/zcs/software/zcsGit/zcsLeetCode/main.cpp
+1457873286 source:/home/zcs/software/zcsGit/zcsLeetCode/main.cpp
 	<iostream>
 	<SingleName.h>
 	<vector>
+	<memory.h>
 
-1457782954 /home/zcs/software/zcsGit/zcsLeetCode/include/SingleName.h
+1457870454 /home/zcs/software/zcsGit/zcsLeetCode/include/SingleName.h
 	<vector>
 	<iostream>
 
-1457614019 source:/home/zcs/software/zcsGit/zcsLeetCode/SingleName.cpp
+1457871349 source:/home/zcs/software/zcsGit/zcsLeetCode/SingleName.cpp
 	"SingleName.h"
+	<iostream>
+	<stack>
+	<algorithm>
+	<memory.h>
 
