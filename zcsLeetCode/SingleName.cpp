@@ -3,6 +3,71 @@
 #include <stack>
 #include <algorithm>
 #include <memory.h>
+
+using std::cout;
+using std::endl;
+/************************************************/
+/**sort*************************/
+/************************************************/
+//debug,,,
+void zcs::sortZCS::quickSort(int* nums, unsigned int n)
+{
+    if (nums==nullptr)
+    {
+        cout<<"nums is NULL"<<endl;
+        return;
+    }
+    if (n==1)
+        return;
+    if (n==2)
+    {
+        if (*nums<*(nums+1))
+            return;
+        int tmp(*(nums+1));
+        *(nums+1)=*nums;
+        *nums=tmp;
+    }
+    int* sta(nums);
+    int* end1(nums+n-1);
+    recurSort(nums, sta, end1);
+}
+
+void zcs::sortZCS::recurSort(int* nums, int* sta, int* end1)
+{
+    int* su=getSu(nums, sta, end1);
+    int* median=sortBySu(nums, sta, end1, su);
+    if ((sta+1)<(median-1))
+        recurSort(nums, sta, median-1);
+    if ((median+1)<(end1))
+        recurSort(nums, median, end1);
+}
+
+int* zcs::sortZCS::getSu(int* nums, int* sta, int* end1)
+{
+    return sta;
+}
+
+int* zcs::sortZCS::sortBySu(int* nums, int* sta, int* end1, int* su)
+{
+    while (sta<end1)
+    {
+        while (sta<=su)
+            ++sta;
+        while (end1>su)
+            --end1;
+        if ((sta-1)==end1)
+        {
+            int tmp(*su);
+            *su=*(sta-1);
+            *(sta-1)=tmp;
+        }
+        int tmp(*sta);
+        *sta=*end1;
+        *end1=tmp;
+    }
+    return su;
+}
+
 /************************************************/
 /**337. House Robber III*************************/
 /**note: 动态规划, 树的后序遍历与广度优先搜索********/

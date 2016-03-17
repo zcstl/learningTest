@@ -6,6 +6,17 @@
 
 //using namespace std;
 namespace zcs{
+    class sortZCS
+    {
+        public:
+        static void quickSort(int* nums,unsigned int n);
+        private:
+        static void recurSort(int* nums,int* start,int* end1);
+        static int* getSu(int* nums,int* start,int* end1);
+        inline static int* sortBySu(int* nums,int* start,int* end1, int* su);
+    };
+
+
     class SingleName
     {
         public:
