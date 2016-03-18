@@ -1,5 +1,100 @@
 #include <iostream>
 #include <string>
+//#include <stdio.h>
+
+using namespace std;
+
+inline int selectMax(int* nums, int sta, int ed)
+{
+    if (sta>ed)
+    {
+        sta=sta^ed;
+        ed=ed^sta;
+        sta=sta^ed;
+    }
+    int max(nums[sta]);
+    for(int i=sta+1;i<=ed;++i)
+    {
+        max=nums[i]>max?nums[i]:max;
+    }
+    return max;
+}
+
+
+int main1()
+{    //N  M
+    int N(0), M(0);
+    //上机环境中若无此while则没有cout,原因未知
+    //原因是因为有多组测试用例, 囧,,,
+    while(cin>>N>>M)
+    {
+        //cin>>N;
+
+        if ((N<=0)||(N>30000))
+        {
+            cout<<"Bad N"<<endl;
+            return 1;
+        }
+
+
+       // cin>>M;
+
+
+        if ((M<=0)||(M>=5000))
+        {
+            cout<<"Bad M"<<endl;
+            return 1;
+        }
+
+
+        int nums[N+1]; //init
+        for(int i=1;i<=N;++i)
+        {
+            cin>>nums[i];
+        }
+
+        char manu('\0');
+        int sta(0), ed(0);
+        for(int i=0;i<M;++i)
+        {
+            cin>>manu>>sta>>ed;
+            if ('Q'==manu)
+            {
+                if((sta<1)||(sta>N)||(ed<1)||(ed>N))
+                {
+                    cout<<"Bad query!"<<endl;
+                    --i;
+                    continue;
+                }
+
+                cout<<selectMax(nums, sta, ed)<<endl;
+            }
+            else if (manu=='U')
+            {
+                if((sta<1)||(sta>N)||(ed<0))
+                {
+                    cout<<"Bad update!"<<endl;
+                    --i;
+                    continue;
+                }
+                nums[sta]=ed;
+            }
+            else
+            {
+          	  	cout<<"Bad manu!!"<<endl;
+          	  	--i;
+         	    continue;
+            }
+         }
+	}
+    return 0;
+}
+
+
+
+/*
+#include <iostream>
+#include <string>  //有些编译器 iostream包含string, 出于移植性考虑, 还是包含string较好
 #include <stdio.h>
 
 using namespace std;
@@ -48,11 +143,12 @@ int main1() //main()等效于int main(), 没有void main!!!
         cin>>nums[count];
     }
 
-    //
+    //使用char数组接受cin的Q, printf的结果为Q,但与"Q"比较返回0
+    //char*传给cin,首先容易越界,其次与"Q"的比较结果不正确
+    //多用string(很复杂的类型), 不要与char* 混用, 除非搞懂相关实现
+    //可以char manu;
     string manu;
-    //char manu[2]; //使用char数组接受cin的Q, printf的结果为Q,但与"Q"比较返回0
-                    //char*传给cin,首先容易越界,其次与"Q"的比较结果不正确
-                    //多用string(很复杂的类型), 不要与char* 混用, 除非搞懂相关实现
+    //char manu[2]; /
     int par1(0), par2(0);
     for(int count=0;count<M;++count)
     {
@@ -93,4 +189,71 @@ int main1() //main()等效于int main(), 没有void main!!!
         return 0;
     }
 }
+*/
 
+/*
+#include <iostream>
+
+using namespace std;
+
+int getMax(int *pScore, int low, int high)
+{
+    if(low > high)
+    {
+        high = low ^ high;
+        low = low ^ high;
+        high = low ^ high;
+    }
+    int maxScore = pScore[low];
+    for(int i = low + 1; i <= high; ++i)
+    {
+        if(maxScore < pScore[i])
+        {
+            maxScore = pScore[i];
+        }
+    }
+
+    return maxScore;
+}
+
+int main()
+{
+    int N = 0;
+    int M = 0;
+    while(cin >> N >> M)
+    {
+        int *pScore = new int[N + 1];
+        for(int i = 1; i <= N; ++i)
+        {
+            cin >> pScore[i];
+        }
+
+        for(int i = 0; i < M; ++i)
+        {
+            char ch = '\0';
+            int low = 0;
+            int high = 0;
+
+            cin >> ch >> low >> high;
+
+            if('Q' == ch)
+            {
+                cout << getMax(pScore, low, high) << endl;
+            }
+            else if('U' == ch)
+            {
+                pScore[low] = high;
+            }
+            else
+            {
+                // continue;
+            }
+        }
+
+        delete[] pScore;
+    }
+
+    return 0;
+}
+
+*/

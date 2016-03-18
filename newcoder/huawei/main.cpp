@@ -1,42 +1,58 @@
 #include <iostream>
-#include <map>
+#include <utility>
+#include <vector>
 #include <algorithm>
-#include <string>
-#include <string.h>
-
 using namespace std;
 
-typedef pair<string, int> PAIR;
-bool cmpByValue(const PAIR& p1, const PAIR& p2);
+typedef pair<string, int> ER;
+bool cmpZCS(const ER&, const ER&);
 
 int main()
 {
-    string oneInput;
-    //char tmp[1024];
-    int rowN;
-    map<string, int> res;
-    while(cin>>oneInput)
+    string sin;
+    vector<ER> res;
+    while(getline(cin, sin))
     {
-        cin>>rowN;
-        ++res[oneInput+" "+to_string(rowN)];
+        //if (sin==NULL)
+        if (sin.size()==0)
+        {
+            //
+        }
+        int idx=sin.rfind('\\');
+        sin=sin.substr(idx+1);
+        int tag(0);//()赋初始值,只能初始化时用
+        for (auto tmp=res.begin(); tmp<res.end(); ++tmp)
+        {
+            if (tmp->first==sin)
+            {
+                tag=1;
+                ++tmp->second;
+                break;
+            }
+        }
+        if (tag==0)
+        {
+            ER tmp(sin,1);
+            res.push_back(tmp);
+            //cout<<tmp.first<<"ffrf"<<endl;
+        }
     }
-    vector<PAIR> resTmp(res.begin(),res.end());
-    sort(resTmp.begin(),resTmp.end(),cmpByValue);
-    char* f1(nullptr);
-    char* f2(nullptr);
-    for(auto i=resTmp.begin();i<resTmp.end();++i)
+    //
+    stable_sort(res.begin(), res.end(), cmpZCS);
+    int i(1);
+    //cout<<res.size()<<endl;
+    for(auto tmp=res.begin();tmp<res.end()&&i<=8;++i, ++tmp)
     {
-        char* tmp=(char*)malloc(1024*sizeof(char));
-        strcpy(tmp,i->first.c_str());
-        f1=strtok(tmp," ");
-        f2=strtok(NULL," ");
-        cout<<f1<<" "<<f2<<" "<<i->second<<endl;
+        int idx=tmp->first.rfind(' ');
+        if (idx<=16)
+            cout << tmp->first<<' '<<tmp->second<<endl;
+        else
+        {
+            tmp->first.erase(0, idx-16);
+            cout << tmp->first<<' '<<tmp->second<<endl;
+        }
     }
-
 }
 
-bool cmpByValue(const PAIR& p1, const PAIR& p2)
-{
-    return p1.second<p2.second;
-}
+
 

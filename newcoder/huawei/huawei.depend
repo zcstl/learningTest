@@ -1,17 +1,36 @@
 # depslib dependency file v1.0
-1458225775 source:/home/zcs/software/zcsGit/newcoder/huawei/main.cpp
+1458299906 source:/home/zcs/software/zcsGit/newcoder/huawei/main.cpp
 	<iostream>
-	<map>
+	<utility>
+	<vector>
 	<algorithm>
+	<iostream>
+	<vector>
 	<string>
+	<algorithm>
+	<iostream>
+	<unordered_map>
+	<set>
 	<string.h>
 
-1458224294 source:/home/zcs/software/zcsGit/newcoder/huawei/huaWei201601.cpp
+1458290033 source:/home/zcs/software/zcsGit/newcoder/huawei/huaWei201601.cpp
+	<iostream>
+	<string>
 	<iostream>
 	<string>
 	<stdio.h>
+	<iostream>
 
-1458225822 source:/home/zcs/software/zcsGit/newcoder/huawei/huaWei201602.cpp
+1458299646 source:/home/zcs/software/zcsGit/newcoder/huawei/huaWei201602.cpp
+	<iostream>
+	<utility>
+	<vector>
+	<algorithm>
+	<iostream>
+	<string>
+	<vector>
+	<string.h>
+	<algorithm>
 	<iostream>
 	<map>
 	<algorithm>
