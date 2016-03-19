@@ -36,6 +36,7 @@
 		</Compiler>
 		<Unit filename="huaWei201601.cpp" />
 		<Unit filename="huaWei201602.cpp" />
+		<Unit filename="huawei2016shixi1.cpp" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
