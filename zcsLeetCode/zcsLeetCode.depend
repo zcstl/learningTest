@@ -16,3 +16,20 @@
 	<algorithm>
 	<memory.h>
 
+1458440293 source:/home/zcsubuntu/zcsUbuntu/macGit/learningTest/zcsLeetCode/main.cpp
+	<iostream>
+	<SingleName.h>
+	<vector>
+	<memory.h>
+
+1458440293 /home/zcsubuntu/zcsUbuntu/macGit/learningTest/zcsLeetCode/include/SingleName.h
+	<vector>
+	<iostream>
+
+1458440293 source:/home/zcsubuntu/zcsUbuntu/macGit/learningTest/zcsLeetCode/SingleName.cpp
+	"SingleName.h"
+	<iostream>
+	<stack>
+	<algorithm>
+	<memory.h>
+
