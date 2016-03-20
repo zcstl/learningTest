@@ -1,27 +1,36 @@
+
+//首先,不同于oj系统,这种类型的机试题,虽然输入都是合法(例如华为),但都是一个程序
+//运行,输入多个测试用例,所以有以下两点要注意:
+//1.外层要有个while循环,对应每次测试
+//2.若把容易定义在外面,则每一次循环,记得清空容器,,
+//对于此题,完全可以先用stl进行排序,若有时间再自己写个快排
 #include <iostream>
 #include <algorithm>
 #include <vector>
 using namespace std;
 
-bool cmpZCS(const int t1, const int t2)
+bool cmpZCS(const int& t1, const int& t2)
 {
-    return t1<t2;
+    return !(t2<t1);
 }
 
 int main()
 {
-    int n;
+    int n(0);
     vector<int> ns;
-    int one;
+    int one(0);
     while(cin>>n)
     {
         int _count(0);
+        /**若ns没有被清空,则保留上次的测试用例,则会出错,,,**/
+        ns.clear();
         while(cin>>one)
         {
             ++_count;
             ns.push_back(one);
             if (_count==n)break;
         }
+        //cmpZCS为形参元素类型的比较函数,且元素一比元素二小返回true,是升序
         sort(ns.begin(),ns.end(),cmpZCS);
 
         int preOne(*ns.begin());
@@ -33,9 +42,15 @@ int main()
         	if(*tmp==preOne)continue;
             cout<<*tmp<<endl,preOne=*tmp;
   	  	}
+
     }
+}
 
+//要熟悉快排写法
+void quickSort()
+{
 
+}
 
 /*
 //宏定义是预处理  #define A 10
