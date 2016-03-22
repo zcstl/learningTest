@@ -27,7 +27,7 @@ bool cmpZCS(const int& t1, const int& t2)
 }
 
 void quickSort(int*,int,int);
-int main()
+int main11()
 {
     //int test[]={1,2,3,4,5,6};int tt=quickSort(test,1,3);cout<<test[99]<<endl,test[1]=1,test[90]=0;return 0;
     //int test[]={3,4,1,5,6,77,1};quickSort(test,0,6);for(int t=0;t<7;++t)cout<<test[t]<<endl;return 0;

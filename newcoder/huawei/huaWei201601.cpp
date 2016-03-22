@@ -21,7 +21,7 @@ inline int selectMax(int* nums, int sta, int ed)
 }
 
 
-int main1()
+int main11()
 {    //N  M
     int N(0), M(0);
     //上机环境中若无此while则没有cout,原因未知
