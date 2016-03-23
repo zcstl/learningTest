@@ -38,7 +38,7 @@
 	<algorithm>
 	<vector>
 
-1458440293 source:/home/zcsubuntu/zcsUbuntu/macGit/learningTest/newcoder/huawei/huaWei201601.cpp
+1458728394 source:/home/zcsubuntu/zcsUbuntu/macGit/learningTest/newcoder/huawei/huaWei201601.cpp
 	<iostream>
 	<string>
 	<iostream>
@@ -66,11 +66,10 @@
 	<string>
 	<string.h>
 
-1458440293 source:/home/zcsubuntu/zcsUbuntu/macGit/learningTest/newcoder/huawei/main.cpp
+1458732135 source:/home/zcsubuntu/zcsUbuntu/macGit/learningTest/newcoder/huawei/main.cpp
 	<iostream>
-	<utility>
-	<vector>
-	<algorithm>
+	<string>
+	<set>
 
 1458631717 source:/home/zcs/software/zcsGit/learningTest/newcoder/huawei/huaWei201601.cpp
 	<iostream>
@@ -115,7 +114,7 @@
 
 1458650267 source:/home/zcs/software/zcsGit/learningTest/newcoder/huawei/main.cpp
 
-1458495180 source:/home/zcsubuntu/zcsUbuntu/macGit/learningTest/newcoder/huawei/huawei2016shixi1.cpp
+1458728394 source:/home/zcsubuntu/zcsUbuntu/macGit/learningTest/newcoder/huawei/huawei2016shixi1.cpp
 	<iostream>
 	<algorithm>
 	<vector>
@@ -134,4 +133,16 @@
 	<iostream>
 	<vector>
 	<iostream>
+
+1458731035 source:/home/zcsubuntu/zcsUbuntu/macGit/learningTest/newcoder/huawei/huawei20162.cpp
+	<iostream>
+	<list>
+	<iostream>
+	<vector>
+	<iostream>
+
+1458732128 source:/home/zcsubuntu/zcsUbuntu/macGit/learningTest/newcoder/huawei/huawei2016ShiXi.cpp
+	<iostream>
+	<vector>
+	<string>
 

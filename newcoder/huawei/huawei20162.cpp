@@ -6,6 +6,7 @@
     1.2.1 vector<T>::erase(iter)返回值与iter相同,但还是用iter接受较好,与list一致
     1.3. list的push_back, erase, size等比较常用
     vector的erase开销大
+    2.set与map底层都是红黑树， set不保留重复值，有去重和排序（增序）效果。
 **/
 
 
@@ -34,7 +35,7 @@ int main(){
 }*/
 
 
-int main(){
+int main111(){
     int N(0);
     list<int> nums;
     while(cin>>N){
