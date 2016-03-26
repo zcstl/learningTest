@@ -40,6 +40,7 @@
 		<Unit filename="huawei2016ShiXi.cpp" />
 		<Unit filename="huawei2016shixi1.cpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="tengXunMoNi.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
