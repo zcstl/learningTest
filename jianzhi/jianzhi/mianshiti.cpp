@@ -1,6 +1,37 @@
 #include "mianshiti.h"
 #include <array>
 #include <vector>
+
+
+/**
+对同一行,同一列的元素都递增的二位数组进行查找
+**/
+void jzOffer::ti3::test(){
+    int row(0), col(0), elem(0);
+    cin>>row>>col>>elem;
+    if(row<=0 || col<=0)return;
+
+    int** arr=new int*[col];for(int i(0); i<col; ++i)arr[i]=new int[row];
+    for(int i(0); i<row; ++i)for(int j(0); j<col; ++j)cin>>arr[i][j];
+
+
+    if(find2DElement(arr, row, col, elem))
+        cout<<"Find it!"<<endl;
+    else
+        cout<<"Don't find it!"<<endl;
+}
+
+bool jzOffer::ti3::find2DElement(int** arr, int row, int col, int n){
+    for(int i(0), j(col-1); i<row && j>=0;)
+        if(arr[i][j]==n)
+            return true;
+        else if (n>arr[i][j])
+                ++i;
+            else
+                --j;
+    return false;
+}
+
 /**
 hash:以空间换时间
 **/

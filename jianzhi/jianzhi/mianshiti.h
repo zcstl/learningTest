@@ -7,6 +7,11 @@
 using namespace std;
 
 namespace jzOffer{
+    class ti3{
+        public:
+            void test();
+            bool find2DElement(int**, int, int, int);
+    };
     class ti35{
         public:
             //char findFirstChar(char* str, unsigned int len);
