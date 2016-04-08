@@ -3,6 +3,52 @@
 #include <vector>
 
 
+
+
+/**
+    由二叉树的前序和中序遍历,重建二叉树的结构
+**/
+
+int jzOffer::ti6::isFind(int* a, int* b, int len){
+    int idx(0);
+    while(idx<len){
+        if(a[0]==b[idx])
+            return idx;
+        else
+            ++idx;
+    }
+    return -1;
+}
+
+jzOffer::ti6::bstNode* jzOffer::ti6::constructBst(int* preOrder, int* inOrder, int len){
+    bstNode* node=nullptr;
+    if(len==0 || preOrder==nullptr || inOrder==nullptr)
+        return node;
+    int idx=isFind(preOrder, inOrder, len);
+    if(idx==-1){
+        cout<<"Bad find!"<<endl;
+        return node;
+    }
+    else{
+        node=new(nothrow) bstNode;
+        if(node==nullptr){
+            cout<<"New error!"<<endl;
+            return node;
+        }
+        node->val=preOrder[0];
+        if(idx==0){
+            node->pL=(bstNode*)nullptr;
+            node->pR=constructBst(preOrder+1, inOrder+1, len-1);
+        }
+        else{
+            node->pL=constructBst(preOrder+1, inOrder+0, idx);
+            node->pR=constructBst(preOrder+idx+1, inOrder+idx+1, len-idx-1);
+        }
+        return node;
+    }
+}
+
+
 /**
 对同一行,同一列的元素都递增的二位数组进行查找
 **/
