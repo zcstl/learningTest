@@ -6,6 +6,7 @@
     **后序遍历**的非递归实现需要额外的存储来判断右节点是否被访问过
     前序和中序使用栈便可以
 **/
+/*
 #include <stdio.h>
 #include <malloc.h>
 #include <stdlib.h>
@@ -133,6 +134,8 @@ void main()
     PostOrderTraverse(T);
     printf("\n");
 }
+*/
+
 
 
 /**
