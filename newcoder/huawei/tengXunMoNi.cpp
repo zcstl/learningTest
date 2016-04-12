@@ -1,3 +1,268 @@
+/**
+    格雷码
+    1.产生n位元的所有格雷码。
+    1.1.格雷码(Gray Code)是一个数列集合，每个数使用二进位来表示，假设使用n位元来表示每个数字，任两个数之间只有一个位元值不同。
+例如以下为3位元的格雷码： 000 001 011 010 110 111 101 100 。
+如果要产生n位元的格雷码，那么格雷码的个数为2^n.
+
+    审题正确后,就是找规律,,,,,
+
+    strcpy的使用
+**/
+#include <iostream>
+#include <string>
+#include <memory.h>
+#include <math.h>
+using namespace std;
+
+int* createGreyCode(int n);
+
+int main(){
+    char* a="1111";
+    char* b="111";
+    strcpy(a, b);
+}
+
+int main0(){
+    int n;
+    cin>>n;
+    int* res=createGreyCode(n);
+    for(int i(0); i<n-1; ++i)
+        cout<<res[i]<<" ";
+    cout<<res[n-1]<<endl;
+    delete[]res;
+}
+
+void swtichToNum(int *resNUm, char** res, int n){
+    for(int i(0); i<n; ++i)
+        for(int j(n-1); j>=0; --j)
+            resNUm[i]+=res[i][j]*pow(2, n-1-j);
+}
+
+int* createGreyCode(int n){
+    int rowN=pow(2, n);
+    char** res=new char*[rowN];
+    for(int i(0); i<rowN; ++i)
+        res[i]=new char[n+1], memset(res[i], 0, sizeof(char)*(n+1)), res[i][n]='\0';
+    res[0][n-1]='0', res[1][n-1]='1';
+
+    for(int i(1); i<rowN; ++i)
+     for(int j=pow(2, i), m=1, th=pow(2, i+1); j<th; ++j, m+=2){
+        strcpy(res[j], res[j-m]);
+        res[j][n-1-i]='1';
+     }
+     int* resNum=new int[rowN];
+     memset(resNum, 0, sizeof(int)*n);
+
+     swtichToNum(resNum, res, rowN);
+     for(int i(0); i<rowN; ++i)
+        delete[]res[i];
+     return resNum;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+    输入两个递增的链表，合并这两个链表并使新链表中的结点是按照递增排序的
+
+    链表部分操作要点： 保存前驱位置
+**/
+/*
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+struct Node{
+    int val;
+    Node* pNext;
+};
+
+Node* mergeList(Node* list1, Node* list2){
+    if(list1==nullptr)
+        return list2;
+    else if(list2==nullptr)
+        return list1;
+    Node* pHead(nullptr);
+    Node* pBefore(nullptr);
+    if(list1->val<=list2->val)
+            pHead=list1, pBefore=list1, list1=list1->pNext;
+        else
+            pHead=list2, pBefore=list2, list2=list2->pNext;
+    //
+    while(list1!=nullptr && list2!=nullptr){
+        if(list1->val<=list2->val)
+            pBefore->pNext=list1, pBefore=list1, list1=list1->pNext;
+        else
+            pBefore->pNext=list2, pBefore=list2, list2=list2->pNext;
+    }
+
+    if(list1!=nullptr)pBefore->pNext=list1;
+    if(list2!=nullptr)pBefore->pNext=list2;
+    return pHead;
+}
+
+Node* createList(int* arr, int n){
+    if(arr==nullptr || n==0)
+        return nullptr;
+    Node* pHead=new Node;
+    pHead->val=arr[0];
+    pHead->pNext=nullptr;
+    Node* pBefore(pHead);
+    for(int i(1); i<n; ++i){
+        pBefore->pNext=new Node;
+        pBefore=pBefore->pNext;
+        pBefore->val=arr[i];
+        pBefore->pNext=nullptr;
+    }
+    return pHead;
+}
+
+void deleteList(Node* listz){
+    Node* tmp(nullptr);
+    while(listz!=nullptr){
+        tmp=listz->pNext;
+        delete listz;
+        listz=tmp;
+    }
+}
+
+void showList(Node* a){
+    while(a!=nullptr)
+        printf("%d ",a->val),a=a->pNext;
+    printf("\n");
+}
+
+int main(){
+    int N(0), M(0);
+    cin>>N>>M;
+    int* arr1=new int[N];
+    int* arr2=new int[M];
+    for(int i(0); i<N; ++i)
+        cin>>arr1[i];
+    for(int i(0); i<M; ++i)
+        cin>>arr2[i];
+    Node* list1=createList(arr1, N);
+    Node* list2=createList(arr2, M);
+    showList(list1), showList(list2);
+    Node* mList=mergeList(list1,list2);
+    showList(mList);
+}
+*/
+
+
+/**
+Time Limit: 2000/1000 MS (Java/Others) Memory Limit: 65536/65536 K (Java/Others)
+Problem Description:
+某糖果公司专门生产儿童糖果，它最受儿童欢迎的糖果有A1、A2两个序列，均采用盒式包装。包装好的A1类糖果体积为一个存储单位，而包装好的A2类糖果体积正好是A1类的两倍。
+
+这两类糖果之所以广受儿童欢迎，是因为糖果中含有公司独家研发的魔幻因子。A1或A2序列中的糖果，看起来包装可能是一样的，但因为其中的魔幻因子含量不同被细分为不同的产品。
+
+临近传统节日，公司的糖果供不应求。作为一个精明的糖果分销商，小东希望能够借此大赚一笔，于是带着现金开着货车来公司提货。货车的容量是确定的，小东希望采购的糖果能够尽可能装满货车，且糖果的魔幻因子总含量最高。只要不超出货车容量，糖果总可以装入货车中。
+
+小东希望你能帮她解决这一问题。
+输入
+输入中有多组测试数据。每组测试数据的第一行有两个整数n和v，1<=n<=10^5, 1<=v<=10^9，n为可供选购糖果数量，v为货车的容量。随后n行为糖果的具体信息，第一行编号为1，第二行编号为2，以此类推，最后一行编号为n。每行包含两个整数ti和pi，1<=ti<=2, 1<=pi<=10^4，ti为糖果所属的序列，1为A1、2为A2，pi则是其中的魔幻因子含量。
+输出
+对每组测试数据，先在单独的一行中输出能采购的糖果中的魔幻因子最高含量，之后在单独的行中按编号从小到大的顺序输出以空格分隔的糖果编号，若有多组糖果组合均能满足要求，输出编号最小的组。若没有糖果能够满足要求，则在第一行中输出0，第二行输出“No”。
+
+样例输入
+3 2
+1 2
+2 7
+1 3
+样例输出
+7
+2
+
+Hint
+
+**/
+
+/*
+#include <iostream>
+//#include <pair>
+#include <algorithm>
+using namespace std;
+
+typedef pair<int, int> data;
+typedef pair<int, float> score;
+
+
+bool cmp1(const score& a, const score& b){
+    return a.first<b.second;
+}
+bool cmp(const score& a, const score& b){
+    return a.second>b.second;
+}
+
+
+int main(){
+    int n(0), total(0);
+    cin>>n>>total;
+    data* res=new data[n];
+    for(int i(0); i<n; ++i)
+        cin>>res[i].first>>res[i].second;
+
+    score* sco=new score[n];
+    for(int i(0); i<n; ++i){
+        sco[i].first=i;
+        sco[i].second=res[i].second*1.0/(res[i].first*1.0);
+    }
+    sort(sco, sco+n-1, cmp);
+    //
+    int weght(0), wei(0), i(0);
+    do{
+        weght+=res[sco[i].first].first;
+        cout<<sco[i].second<<" "<<res[sco[i].first].first<<endl;
+        wei+=sco[i].second*res[sco[i].first].first, ++i;
+        cout<<wei<<endl;
+    }while(weght<=total);
+    cout<<wei<<" "<<sco[i-1].second*res[sco[i-1].first].first<<endl;
+    wei-=sco[i-1].second*res[sco[i-1].first].first;
+    if(weght<=0){
+        cout<<0<<endl;
+        cout<<"No"<<endl;
+    }else{
+        cout<<wei<<endl;
+        int* res1=new int[i-1];
+        for(int j(0); j<i-1; ++j)
+            res1[j]=sco[j].first;
+        sort(res1, res1+i-2);
+        for(int j(0); j<i-1; ++j)
+            cout<<res1[j]+1<<" ";
+        cout<<endl;
+    }
+}
+*/
+
 
 
 /**
@@ -510,10 +775,7 @@ void inputValue(int** arr, int sta, int n, int* val){
 */
 
 
-/**
-    格雷码
 
-**/
 
 
 /**

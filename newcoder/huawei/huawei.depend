@@ -71,7 +71,7 @@
 	<string>
 	<set>
 
-1458631717 source:/home/zcs/software/zcsGit/learningTest/newcoder/huawei/huaWei201601.cpp
+1459903685 source:/home/zcs/software/zcsGit/learningTest/newcoder/huawei/huaWei201601.cpp
 	<iostream>
 	<string>
 	<iostream>
@@ -79,7 +79,7 @@
 	<stdio.h>
 	<iostream>
 
-1458464295 source:/home/zcs/software/zcsGit/learningTest/newcoder/huawei/huaWei201602.cpp
+1459903685 source:/home/zcs/software/zcsGit/learningTest/newcoder/huawei/huaWei201602.cpp
 	<iostream>
 	<utility>
 	<vector>
@@ -99,7 +99,7 @@
 	<string>
 	<string.h>
 
-1458631689 source:/home/zcs/software/zcsGit/learningTest/newcoder/huawei/huawei2016shixi1.cpp
+1459903685 source:/home/zcs/software/zcsGit/learningTest/newcoder/huawei/huawei2016shixi1.cpp
 	<iostream>
 	<algorithm>
 	<vector>
@@ -112,7 +112,10 @@
 	<math.h>
 	<iostream>
 
-1458650267 source:/home/zcs/software/zcsGit/learningTest/newcoder/huawei/main.cpp
+1459903685 source:/home/zcs/software/zcsGit/learningTest/newcoder/huawei/main.cpp
+	<iostream>
+	<string>
+	<set>
 
 1458728394 source:/home/zcsubuntu/zcsUbuntu/macGit/learningTest/newcoder/huawei/huawei2016shixi1.cpp
 	<iostream>
@@ -127,7 +130,7 @@
 	<math.h>
 	<iostream>
 
-1458652448 source:/home/zcs/software/zcsGit/learningTest/newcoder/huawei/huawei20162.cpp
+1459903685 source:/home/zcs/software/zcsGit/learningTest/newcoder/huawei/huawei20162.cpp
 	<iostream>
 	<list>
 	<iostream>
@@ -151,6 +154,48 @@
 	<iostream>
 
 1459870004 source:/home/zcsubuntu/zcsUbuntu/macGit/learningTest/newcoder/huawei/tengXunMoNi.cpp
+	<iostream>
+	<string>
+	<iostream>
+	<string>
+	<iostream>
+	<string>
+	<iostream>
+	<string>
+	<iostream>
+	<string>
+
+1459903685 source:/home/zcs/software/zcsGit/learningTest/newcoder/huawei/huawei2016ShiXi.cpp
+	<iostream>
+	<vector>
+	<string>
+	<iostream>
+	<vector>
+	<algorithm>
+	<iostream>
+
+1459903685 source:/home/zcs/software/zcsGit/learningTest/newcoder/huawei/meitu.cpp
+
+1460471633 source:/home/zcs/software/zcsGit/learningTest/newcoder/huawei/tengXunMoNi.cpp
+	<iostream>
+	<string>
+	<memory.h>
+	<math.h>
+	<iostream>
+	<stdio.h>
+	<iostream>
+	<algorithm>
+	<stdio.h>
+	<malloc.h>
+	<stdlib.h>
+	<queue>
+	<stack>
+	<iostream>
+	<iostream>
+	<string>
+	<string.h>
+	<iostream>
+	<string>
 	<iostream>
 	<string>
 	<iostream>
