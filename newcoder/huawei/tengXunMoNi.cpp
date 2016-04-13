@@ -1,4 +1,8 @@
 /**
+
+**/
+
+/**
     格雷码
     1.产生n位元的所有格雷码。
     1.1.格雷码(Gray Code)是一个数列集合，每个数使用二进位来表示，假设使用n位元来表示每个数字，任两个数之间只有一个位元值不同。
@@ -9,6 +13,7 @@
 
     strcpy的使用
 **/
+/*
 #include <iostream>
 #include <string>
 #include <memory.h>
@@ -59,36 +64,7 @@ int* createGreyCode(int n){
         delete[]res[i];
      return resNum;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+*/
 
 /**
     输入两个递增的链表，合并这两个链表并使新链表中的结点是按照递增排序的

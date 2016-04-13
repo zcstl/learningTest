@@ -3,6 +3,44 @@
 #include <vector>
 
 
+/**
+    有序一次旋转数组的最小值
+    *******
+    核心是重复元素的考虑,若输入没有重复元素,则只需@1便可以,若有则需要增加@2
+    思路:把所有可能的下标更新情况都考虑,即使有重复元素, 也就多了个分类,多考虑一种情况而已
+**/
+#define ZCSError() {cout<<"nullptr!!"<<endl;return-1;}
+int jzOffer::ti8::minZ(int* a, int l, int h){
+    if(a==nullptr)ZCSError();
+    if(l==h)return a[l];
+    if(l>h){
+        cout<<"error: low is higher than high!"<<endl;
+        return -1;
+    }
+
+    int mid((l+h)/2);
+    int mid1((l+h)/2), l1(l), h1(h);
+    //@1
+    while(mid>l){
+        if(a[mid]>=a[l] && a[mid]>a[h])
+            l=mid;
+        else
+            h=mid;
+        mid=(l+h)/2;
+    }
+    //@2
+    while(mid1>l1){
+        if(a[mid1]>=a[l1] && a[mid1]>=a[h1])
+            l1=mid1;
+        else
+            h1=mid1;
+        mid1=(l1+h1)/2;
+    }
+    int m1=a[l]<a[h]?a[l]:a[h];
+    int m2=a[l1]<a[h1]?a[l1]:a[h1];
+
+    return m1<m2?m1:m2;
+}
 
 
 /**

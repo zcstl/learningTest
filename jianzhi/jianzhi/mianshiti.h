@@ -10,6 +10,12 @@ using namespace std;
 
 namespace jzOffer{
 
+    class ti8{
+        public:
+            int minZ(int* arr, int low, int high);
+    };
+
+
     template<typename T>
     class ti7{
     /**
