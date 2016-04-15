@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1460532270 source:/home/zcs/software/zcsGit/learningTest/jianzhi/jianzhi/main.cpp
+1460685798 source:/home/zcs/software/zcsGit/learningTest/jianzhi/jianzhi/main.cpp
 	<iostream>
 	"mianshiti.h"
 
@@ -8,7 +8,7 @@
 	<array>
 	<vector>
 
-1460530532 /home/zcs/software/zcsGit/learningTest/jianzhi/jianzhi/mianshiti.h
+1460685800 /home/zcs/software/zcsGit/learningTest/jianzhi/jianzhi/mianshiti.h
 	<string>
 	<iostream>
 	<vector>

@@ -2,7 +2,12 @@
 #include "mianshiti.h"
 using namespace std;
 
-
+int main10(){
+    jzOffer::ti10 test;
+    cout<<test.numberOfOne(10)<<endl;
+    cout<<test.numberOfOne(-10)<<endl;
+    cout<<test.numberOfOne(0)<<endl;
+}
 
 int main8(){
     int a[]={3,4,5,1,2};
@@ -68,5 +73,5 @@ int main6()
 }
 
 int main(){
-    main8();
+    main10();
 }

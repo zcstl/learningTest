@@ -2,6 +2,35 @@
 #include <array>
 #include <vector>
 
+/**
+    输入一个整数,输出该整数二进制表示中1的个数
+    注:负数补码表示,不是原码表示
+
+    原码->补码:取反加1,符号位不变
+    补码->原码:取反加1,符号位不变
+    取反操作符:~, 符号位也会改变
+
+    考虑到负数的情况:1.与a=1进行与操作,然后与左移一位的a进行与操作,,,
+    2.(n-1)&n,则最右边的1会成为0
+**/
+/*输入负数则计算出错
+int jzOffer::ti10::numberOfOne(int n){
+    int times(0);
+    //if(n<0)n=-n, ++times;  原码表示时
+    //if(n<0)n=~n+1;
+    while(n>0){
+        times+=n&1;
+        n=n>>1;
+    }
+    return times;
+}
+*/
+
+int jzOffer::ti10::numberOfOne(int n){
+    int times(0);
+    while(n)n=(n-1)&n, ++times;
+    return times;
+}
 
 /**
     有序一次旋转数组的最小值

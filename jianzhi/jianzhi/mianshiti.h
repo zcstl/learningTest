@@ -10,6 +10,11 @@ using namespace std;
 
 namespace jzOffer{
 
+    class ti10{
+        public:
+        int numberOfOne(int n);
+    };
+
     class ti8{
         public:
             int minZ(int* arr, int low, int high);
