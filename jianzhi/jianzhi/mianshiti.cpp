@@ -3,29 +3,103 @@
 #include <vector>
 #include <memory.h>
 /**
+    以O(1)时间删除pToBeDeleted指向链表的节点
+
+    删除链表节点的两种实现,且都考虑了待删除节点不在链表中
+**/
+//O(1)删除非尾节点
+void deleteNode(jzOffer::listNode** pListHead, jzOffer::listNode* pToBeDeleted){
+    if(pListHead==nullptr || *pListHead==nullptr || pToBeDeleted==nullptr)
+        return;
+
+    jzOffer::listNode* ptr=*pListHead;
+    //删除节点是否为头节点
+    if(ptr==pToBeDeleted){
+        *pListHead=ptr->pNext;
+        delete pToBeDeleted;
+        return;
+    }//是否为尾节点(此处代码实现要求是非头节点)
+    if(pToBeDeleted->pNext==nullptr){
+        while(ptr->pNext!=pToBeDeleted && ptr!=nullptr)
+            ptr=ptr->pNext;
+        if(ptr==nullptr)//考虑了待删除节点不在链表中
+            return;
+        ptr->pNext==nullptr;
+        delete pToBeDeleted;
+        return;
+    }//非尾节点,非头节点
+    ptr=pToBeDeleted->pNext;
+    if(ptr!=nullptr){//考虑了待删除节点不在链表中,但这样会埋下乱删除节点的隐患
+        pToBeDeleted->val=ptr->val;
+        pToBeDeleted->pNext=ptr->pNext;
+        delete ptr;
+    }
+
+}
+
+//O(n),顺序遍历
+/*
+void deleteNode(jzOffer::listNode** pListHead, jzOffer::listNode* pToBeDeleted){
+    if(pListHead==nullptr || *pListHead==nullptr || pToBeDeleted==nullptr)
+        return;
+    jzOffer::listNode* ptr=*pListHead;
+    if(ptr==pToBeDeleted){
+        *pListHead=ptr->pNext;
+        delete pToBeDeleted;
+    }else{
+        while(ptr->pNext!=nullptr){
+            if(ptr->pNext==pToBeDeleted)
+                break;
+            ptr=ptr->pNext;
+        }
+    }
+    if(ptr->pNext!=nullptr){
+        ptr->pNext=ptr->pNext->pNext;
+        delete pToBeDeleted;
+    }
+}
+*/
+
+
+/**
     打印1到最大的n位数
+
+    1.大数问题:数组或字符串表示
+    2.注意程序中判断溢出n位数的方法,和打印n位数的方法
+
+    3.此题也可以用递归实现全排列,但t上没啥优势
+
+    延伸:1.大数相加,得考虑正负; 2.大数相乘
 **/
 int jzOffer::ti12::print1ToMaxN(int n){
     if(n<0) return -1;
     if(n==0) return 0;
 
-    int* res=new int[n];
-    memset(res, 0, sizeof(int)*n), ++res[n-1];
+    char* res=new char[n];
+    memset(res, 0, sizeof(char)*n), ++res[n-1];
     bool isContiune(true), isZero(true);
+    /**
+        isContinue当数字超出n位数时为false
+        isZero为true表示res[i]为前部份0
+    **/
     while(isContiune){
         for(int i(0); i<n; ++i){
             if(res[i]!=0 || !isZero){
                 isZero=false;
-                printf("%d", res[i]);
+                printf("%d", (int)res[i]);
             }
         }
         printf("\n"), isZero=true;
         addOne(res, n, isContiune);
     }
+    delete []res;
     return 0;
 }
 
-void jzOffer::ti12::addOne(int * res, int& len, bool& isCon){
+inline void jzOffer::ti12::addOne(char * res, int& len, bool& isCon){
+    /**
+        产生进位,isPush为true,当res[0]产生进位,i为-1,isCon为false,退出while循环
+    **/
     bool isPush(false);
     int i=len-1;
     do{
@@ -35,7 +109,7 @@ void jzOffer::ti12::addOne(int * res, int& len, bool& isCon){
             isPush=false;
     }
     while(isPush && i>-1);
-    if(res[0]==0 && i==-1)
+    if(i==-1)
         isCon=false;
 }
 

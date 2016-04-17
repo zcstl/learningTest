@@ -10,9 +10,18 @@ using namespace std;
 
 namespace jzOffer{
 
+    struct listNode{
+        int val;
+        listNode* pNext;
+    };
+    class ti13{
+        public:
+            void deleteNode(jzOffer::listNode** pListHead, jzOffer::listNode* pToBeDeleted);
+    };
+
     class ti12{
         private:
-            void addOne(int* a, int& len, bool& isCon);
+            inline void addOne(char* a, int& len, bool& isCon);
         public:
             int print1ToMaxN(int n);
     };

@@ -4,8 +4,7 @@ using namespace std;
 
 int main12(){
     jzOffer::ti12 test;
-    int n=1;
-    test.print1ToMaxN(2);
+    test.print1ToMaxN(5);
 }
 
 int main11(){
