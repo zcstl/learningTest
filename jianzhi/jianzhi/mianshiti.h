@@ -10,9 +10,25 @@ using namespace std;
 
 namespace jzOffer{
 
+    class ti12{
+        private:
+            void addOne(int* a, int& len, bool& isCon);
+        public:
+            int print1ToMaxN(int n);
+    };
+
+    class ti11{
+        private:
+            bool equa(int a, int b);
+            double curPower(double base, int exponent);
+        public:
+            bool isValidInput;
+            double power(double base, int exponent);
+    };
+
     class ti10{
         public:
-        int numberOfOne(int n);
+            int numberOfOne(int n);
     };
 
     class ti8{

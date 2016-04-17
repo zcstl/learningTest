@@ -1,7 +1,107 @@
 #include "mianshiti.h"
 #include <array>
 #include <vector>
+#include <memory.h>
+/**
+    打印1到最大的n位数
+**/
+int jzOffer::ti12::print1ToMaxN(int n){
+    if(n<0) return -1;
+    if(n==0) return 0;
 
+    int* res=new int[n];
+    memset(res, 0, sizeof(int)*n), ++res[n-1];
+    bool isContiune(true), isZero(true);
+    while(isContiune){
+        for(int i(0); i<n; ++i){
+            if(res[i]!=0 || !isZero){
+                isZero=false;
+                printf("%d", res[i]);
+            }
+        }
+        printf("\n"), isZero=true;
+        addOne(res, n, isContiune);
+    }
+    return 0;
+}
+
+void jzOffer::ti12::addOne(int * res, int& len, bool& isCon){
+    bool isPush(false);
+    int i=len-1;
+    do{
+        if((res[i]++)==9)
+            isPush=true, res[i]=0, --i;
+        else
+            isPush=false;
+    }
+    while(isPush && i>-1);
+    if(res[0]==0 && i==-1)
+        isCon=false;
+}
+
+/**
+    求一个数的整数次方,不用考虑大数
+
+    要点:
+    1.功能测试: 次数为负数要考虑etc
+    2.边界测试: 0的0次在数学上没有意义,返回0和1都可以接受
+    3.负面测试: 0的负数次, 通过返回值,或全局变量或异常来传达信息
+    细节:
+    1.计算机表示小数都有误差,如果两个数字的差的绝对值很小(如0.0000001)则认为这两个数相等
+    2.位运算效率远高于除和模运算,除2用右移代替,模2用与1与运算代替
+**/
+double jzOffer::ti11::power(double base, int expo){
+    if(equa(base, 0) && expo<0){isValidInput=false; return -1;}
+    isValidInput=true;
+    if(equa(base, 0))return 0; //0的0次也返回0
+
+    double res(1);
+    int expoTmp(expo);
+    if(expoTmp<0)
+        expoTmp=-expoTmp;
+    res=curPower(base, expoTmp);
+    if(expo<0)
+        return 1/res;
+    return res;
+}
+
+bool jzOffer::ti11::equa(int a, int b){
+    if(a-b<0.0000001 && a-b>-0.0000001)
+        return true;
+    return false;
+}
+
+double jzOffer::ti11::curPower(double base, int expo){
+    if(expo==0)
+        return 1;
+    double res=curPower(base, expo>>1);
+    res*=res;
+    if(expo&1 == 1)
+        res*=base;
+    return res;
+}
+
+/*功能测试未通过
+double powerZCS(double base, int exponent){
+    //if(exponent<0){printf("Bad exponent!\n"), return 0;}
+    if(base==0)return 0;
+    if(exponent==0)return 1;
+    if(exponent==1)return base;
+    if(exponent==-1)return 1/base;
+
+    int res(base);
+    int expTmp(exponent);
+    if(expTmp<0)expTmp=-expTmp;
+    while(expTmp!=1){
+        res*=res;
+        expTmp/=2;
+    }
+    if(exponent%2==1)
+        res*=base;
+    if(exponent<0)return 1/res;
+    return res;
+}
+*/
 /**
     输入一个整数,输出该整数二进制表示中1的个数
     注:负数补码表示,不是原码表示

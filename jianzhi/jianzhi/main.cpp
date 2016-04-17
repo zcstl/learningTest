@@ -2,6 +2,23 @@
 #include "mianshiti.h"
 using namespace std;
 
+int main12(){
+    jzOffer::ti12 test;
+    int n=1;
+    test.print1ToMaxN(2);
+}
+
+int main11(){
+    jzOffer::ti11 test;
+    printf("%f\n",test.power(2,8));
+    printf("%f\n",test.power(2,9));
+    printf("%f\n",test.power(-1,4));
+    printf("%f\n",test.power(0,-1));
+    printf("%f\n",test.power(2,-1));
+    printf("%f\n",test.power(-2,-1));
+    printf("%f\n",test.power(2,1));
+}
+
 int main10(){
     jzOffer::ti10 test;
     cout<<test.numberOfOne(10)<<endl;
@@ -73,5 +90,5 @@ int main6()
 }
 
 int main(){
-    main10();
+    main12();
 }
