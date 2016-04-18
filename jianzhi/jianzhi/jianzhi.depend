@@ -17,3 +17,21 @@
 	<queue>
 	<exception>
 
+1460948284 source:/home/zcsubuntu/zcsUbuntu/macGit/learningTest/jianzhi/jianzhi/main.cpp
+	<iostream>
+	"mianshiti.h"
+
+1460949328 /home/zcsubuntu/zcsUbuntu/macGit/learningTest/jianzhi/jianzhi/mianshiti.h
+	<string>
+	<iostream>
+	<vector>
+	<stack>
+	<queue>
+	<exception>
+
+1460949328 source:/home/zcsubuntu/zcsUbuntu/macGit/learningTest/jianzhi/jianzhi/mianshiti.cpp
+	"mianshiti.h"
+	<array>
+	<vector>
+	<memory.h>
+

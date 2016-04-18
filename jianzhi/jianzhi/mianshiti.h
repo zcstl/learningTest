@@ -1,6 +1,6 @@
 #ifndef MIANSHITI_H_INCLUDED
 #define MIANSHITI_H_INCLUDED
-#include <string>
+#include <string>//swap, <algorithm>
 #include <iostream>
 #include <vector>
 #include <stack>
@@ -14,6 +14,17 @@ namespace jzOffer{
         int val;
         listNode* pNext;
     };
+
+    class ti15{
+        public:
+            listNode* getTheLastKthNode(listNode** pList, int k);
+    };
+
+    class ti14{
+        public:
+            void adjustArrayToApartOdd(int* arr, int len);
+    };
+
     class ti13{
         public:
             void deleteNode(jzOffer::listNode** pListHead, jzOffer::listNode* pToBeDeleted);

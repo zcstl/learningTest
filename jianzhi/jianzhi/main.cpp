@@ -2,6 +2,21 @@
 #include "mianshiti.h"
 using namespace std;
 
+
+int main14(){
+    int a[]={3,6,8,1,3,6,6,7,1,1};
+    int e[]={1,3,5,7,9,2,4,6,8,10};
+    int f[]={2,4,6,8,10,1,3,5,7,9};
+    int b[1]={1};//数组没有指定大小的话，列表初始化不能为空，但此在gnu下没有报错
+    int* c=nullptr;
+    jzOffer::ti14 test;
+    test.adjustArrayToApartOdd(a, 10);
+    test.adjustArrayToApartOdd(e, 10);
+    test.adjustArrayToApartOdd(f, 10);
+    test.adjustArrayToApartOdd(b, 0);
+    test.adjustArrayToApartOdd(c, 10);
+}
+
 int main12(){
     jzOffer::ti12 test;
     test.print1ToMaxN(5);
@@ -89,5 +104,5 @@ int main6()
 }
 
 int main(){
-    main12();
+    main14();
 }

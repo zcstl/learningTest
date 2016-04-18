@@ -2,6 +2,40 @@
 #include <array>
 #include <vector>
 #include <memory.h>
+
+/**
+    删除链表倒数第k个节点
+**/
+jzOffer::listNode* jzOffer::ti15::getTheLastKthNode(jzOffer::listNode** pList, int k){
+
+
+}
+
+/**
+    调整数组顺序使得奇数位于偶数前面，odd，even
+
+    1.一般做法，类似于quickSort的一趟partition
+    2.考虑可扩展性（代码的可重用性）的做法：将拆分数组操作和判断标准实现解耦合
+    传入函数指针，(bool)(*func)(int);当然可以进一步把数组
+    元素泛化。
+**/
+
+
+void jzOffer::ti14::adjustArrayToApartOdd(int* arr, int len){
+    if(arr==nullptr || len<1)
+        return;
+    int low(0), high(len-1);
+    while(low<high){
+        while((arr[low]&1)==1 && low<high)++low;
+        while((arr[high]&1)==0 && low<high)--high;
+        swap(arr[low], arr[high]);
+    }
+    for(int i(0); i<len; ++i)
+        printf("%d ",arr[i]);
+    printf("\n");
+}
+
+
 /**
     以O(1)时间删除pToBeDeleted指向链表的节点
 
