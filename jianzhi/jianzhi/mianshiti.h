@@ -15,6 +15,19 @@ namespace jzOffer{
         listNode* pNext;
     };
 
+    struct binaryTreeNode{
+        int val;
+        binaryTreeNode* pLeft;
+        binaryTreeNode* pRight;
+    };
+
+    class ti18{
+        public:
+            bool isChildTree(binaryTreeNode* tree, binaryTreeNode* cTree);
+        private:
+            bool isChildTree_(binaryTreeNode* tree, binaryTreeNode* cTree);
+    };
+
     class ti17{
         public:
             listNode* mergeSortedList(listNode** pList1, listNode** pList2);

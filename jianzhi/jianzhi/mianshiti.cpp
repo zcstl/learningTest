@@ -2,7 +2,31 @@
 #include <array>
 #include <vector>
 #include <memory.h>
+/**
+    判断二叉树b是否是二叉树a的子树
 
+    重点是鲁棒性，空指针的判断，防御性编程
+    1.常规实现，先序遍历找到等于b的根节点的节点，每找到一个节点，需要调用函数判断是否为子树
+
+    2.自己的实现：将先序遍历和判断相同节点子节点是否相同柔和在一起咯 :）
+**/
+//a b都不为空，判断是否子树才有意义
+bool jzOffer::ti18::isChildTree(jzOffer::binaryTreeNode* a, jzOffer::binaryTreeNode* b){
+    if(a!=nullptr && b!=nullptr)
+        return isChildTree_(a, b);
+    return false;
+}
+
+bool jzOffer::ti18::isChildTree_(jzOffer::binaryTreeNode* a, jzOffer::binaryTreeNode* b){
+    if(b==nullptr)
+        return true;
+    else if(a==nullptr)
+            return false;
+    if(a->val==b->val)
+        if(isChildTree(a->pLeft, b->pLeft) && isChildTree(a->pRight, b->pRight))
+            return true;
+    return isChildTree(a->pLeft, b) || isChildTree(a->pRight, b);
+}
 /**
     合并两个排序的链表
 
