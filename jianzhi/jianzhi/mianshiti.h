@@ -15,6 +15,20 @@ namespace jzOffer{
         listNode* pNext;
     };
 
+    class ti17{
+        public:
+            listNode* mergeSortedList(listNode** pList1, listNode** pList2);
+            listNode* mergeSortedListV1(listNode* pList1, listNode* pList2);
+    };
+
+    class ti16{
+        public:
+            listNode* rotateList(listNode* pList);
+            listNode* rotateListV1(listNode* pList);
+        private:
+            listNode* rotateList_(listNode* pList, listNode** pTail);
+    };
+
     class ti15{
         public:
             listNode* getTheLastKthNode(listNode** pList, int k);

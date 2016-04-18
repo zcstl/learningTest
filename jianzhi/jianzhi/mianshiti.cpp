@@ -4,11 +4,129 @@
 #include <memory.h>
 
 /**
-    删除链表倒数第k个节点
+    合并两个排序的链表
+
+    1.指针操作，留意空指针，鲁棒性
+    2.递归实现代码更为简洁，但递归有递归的缺点
+
+    3.此处形参用listNode** pL1没有价值还增加代码量
+**/
+//递归实现
+jzOffer::listNode* jzOffer::ti17::mergeSortedListV1(jzOffer::listNode* pL1, jzOffer::listNode* pL2){
+    if(pL1==nullptr)
+        return pL2;
+    else if(pL2==nullptr)
+        return pL1;
+
+    jzOffer::listNode* pAhead(nullptr);
+    if(pL1->val < pL2->val){
+        pAhead=pL1;
+        pAhead->pNext=mergeSortedListV1(pL1->pNext, pL2);
+    }else{
+        pAhead=pL2;
+        pAhead->pNext=mergeSortedListV1(pL1, pL2->pNext);
+    }
+    return pAhead;
+}
+
+//循环实现
+jzOffer::listNode* jzOffer::ti17::mergeSortedList(jzOffer::listNode** pL1, jzOffer::listNode** pL2){
+    if(pL1==nullptr || *pL2==nullptr)
+        if(pL2==nullptr || *pL2==nullptr)
+            return nullptr;
+        else
+            return *pL2;
+    else if(pL2==nullptr || *pL2==nullptr)
+            return *pL1;
+
+    jzOffer::listNode* p1(*pL1), *p2(*pL2), *pBefo, *pList;
+    if(p1->val < p2->val)
+        pBefo=p1, p1=p1->pNext;
+    else
+        pBefo=p2, p2=p2->pNext;
+    pList=pBefo;
+    while(p1!=nullptr && p2!=nullptr){
+        if(p1->val < p2->val)
+            pBefo=p1, p1=p1->pNext;
+        else
+            pBefo=p2, p2=p2->pNext;
+    }
+    if(p1==nullptr)
+        pBefo->pNext=p2;
+    else
+        pBefo->pNext=p1;
+    return pList;
+}
+
+/**
+    反转链表
+
+    需三个指针分别指向当前节点，前驱及后继节点
+    1.递归实现的版本
+**/
+jzOffer::listNode* jzOffer::ti16::rotateList_(jzOffer::listNode* pL, jzOffer::listNode** pTail){
+    if(pL->pNext==nullptr){
+        *pTail=pL;
+        return pL;
+    }
+    jzOffer::listNode* pBehind=rotateList_(pL->pNext, pTail);
+    pBehind->pNext=pL;
+    return pL;
+}
+jzOffer::listNode* jzOffer::ti16::rotateListV1(jzOffer::listNode* pL){
+    if(pL==nullptr)
+        return nullptr;
+    jzOffer::listNode *tail(nullptr), **pTail(&tail);//
+    rotateList_(pL, pTail);
+    pL->pNext==nullptr;
+    return tail;
+}
+
+jzOffer::listNode* jzOffer::ti16::rotateList(jzOffer::listNode* pL){
+    if(pL==nullptr)
+        return nullptr;
+    jzOffer::listNode* pBehind(pL->pNext), *tmp;
+    pL->pNext=nullptr;
+    while(pBehind!=nullptr)
+        tmp=pBehind->pNext, pBehind->pNext=pL, pL=pBehind, pBehind=tmp;
+    return pL;
+}
+
+
+/**
+    返回/删除链表倒数第k个节点
+    此处主要考察代码的鲁棒性
+
+    1.若仅仅返回倒数第k个节点，形参为listNode* pList便可以
+    2.仅返还倒数第k个节点的函数比删除的代码量少一半；
+
+    **3.两个指针，一快一慢遍历链表。 如求链表的中间节点，判断单向链表是否成环
 **/
 jzOffer::listNode* jzOffer::ti15::getTheLastKthNode(jzOffer::listNode** pList, int k){
+    if(pList==nullptr || *pList==nullptr || k<1)
+        return nullptr;
+    //1
+    jzOffer::listNode* pBefo(*pList), *ptr(*pList), *tmp;
+    int countNode(0);
+    while(ptr!=nullptr && countNode!=k+1)
+        ptr=ptr->pNext, ++countNode;
 
-
+    if(ptr==nullptr && countNode<k)
+        return nullptr;
+    if(ptr==nullptr && countNode==k){
+        tmp=*pList;
+        *pList=(*pList)->pNext;
+        delete tmp;
+        tmp=nullptr;
+        return nullptr;
+    }
+    //2
+    while(ptr!=nullptr)
+        ptr=ptr->pNext, pBefo=pBefo->pNext;
+    tmp=pBefo->pNext;
+    pBefo->pNext=pBefo->pNext->pNext;
+    delete tmp;
+    tmp=nullptr;
 }
 
 /**
