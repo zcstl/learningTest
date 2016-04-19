@@ -3,6 +3,39 @@
 #include <vector>
 #include <memory.h>
 /**
+    包含min函数的栈，使得pop，push和min都为O(1)
+**/
+/**
+    顺时针打印矩阵
+**/
+/**
+    返回二叉树的镜像
+
+    1.题意理解错误，把镜像理解成拷贝，这个得和面试官沟通，
+    看是否是镜子里的像的意思,还得确定是否在原来树结构中改变
+    2.要熟悉前序和中序遍历的非递归实现
+**/
+jzOffer::binaryTreeNode* jzOffer::ti19::getBinaryTreeImage(jzOffer::binaryTreeNode* t){
+    if(t==nullptr)
+        return nullptr;
+    //jzOffer::binaryTreeNode* node=new jzOffer::binaryTreeNode;
+    //node->val=t->val;
+    jzOffer::binaryTreeNode* tmp=t->pLeft;
+    t->pLeft=getBinaryTreeImage(t->pRight);
+    t->pRight=getBinaryTreeImage(tmp);
+    return t;
+}
+/*
+jzOffer::binaryTreeNode* jzOffer::ti19::getBinaryTreeImage(jzOffer::binaryTreeNode* t){
+    if(t==nullptr)
+        return nullptr;
+    jzOffer::binaryTreeNode* node=new jzOffer::binaryTreeNode;
+    node->val=t->val;
+    node->pLeft=getBinaryTreeImage(t->pLeft);
+    node->pRight=getBinaryTreeImage(t->pRight);
+    return node;
+}*/
+/**
     判断二叉树b是否是二叉树a的子树
 
     重点是鲁棒性，空指针的判断，防御性编程

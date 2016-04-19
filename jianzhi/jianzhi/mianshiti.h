@@ -21,6 +21,15 @@ namespace jzOffer{
         binaryTreeNode* pRight;
     };
 
+    class ti21{};
+
+    class ti20{};
+
+    class ti19{
+        public:
+            binaryTreeNode* getBinaryTreeImage(binaryTreeNode* tree);
+    };
+
     class ti18{
         public:
             bool isChildTree(binaryTreeNode* tree, binaryTreeNode* cTree);
