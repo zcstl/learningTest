@@ -1,7 +1,20 @@
 #include <iostream>
 #include "mianshiti.h"
 using namespace std;
-
+int main21(){
+    jzOffer::ti21<int> test;
+    test.push(2);
+    test.push(3);
+    test.push(1);
+    test.push(0);
+    //程序执行先执行test.minT再执行topAndPop
+    /**注意<<的执行顺序**/
+    cout<<test.topAndPop()<<" "<<test.minT()<<endl;
+    cout<<test.topAndPop()<<" "<<test.minT()<<endl;
+    cout<<test.topAndPop()<<" "<<test.minT()<<endl;
+    cout<<test.topAndPop()<<" "<<test.minT()<<endl;
+    cout<<test.topAndPop()<<" "<<test.minT()<<endl;
+}
 
 int main14(){
     int a[]={3,6,8,1,3,6,6,7,1,1};
@@ -104,5 +117,5 @@ int main6()
 }
 
 int main(){
-    main14();
+    main21();
 }

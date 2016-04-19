@@ -3,8 +3,31 @@
 #include <vector>
 #include <memory.h>
 /**
-    包含min函数的栈，使得pop，push和min都为O(1)
+    从上往下打印二叉树
+
+    queue与deque的api不同，前者与stack相似但不同
+    注意以下程序中判断条件的优化
 **/
+void jzOffer::ti23::printBSTFromUpToDown(jzOffer::binaryTreeNode* t){
+    if(!t)
+        return;
+    queue<jzOffer::binaryTreeNode*> tmp;
+    tmp.push(t);
+    while(tmp.size()){
+        t=tmp.front(), printf("%d ",t->val), tmp.pop();
+        if(t->pLeft)
+            tmp.push(t->pLeft);
+        if(t->pRight)
+            tmp.push(t->pRight);
+    }
+}
+/**
+    包含min函数的栈，使得pop，push和min都为O(1)
+
+    使用辅助栈，入栈保存当前最小值
+    类模板实现
+**/
+
 /**
     顺时针打印矩阵
 **/

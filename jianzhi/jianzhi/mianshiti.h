@@ -21,7 +21,44 @@ namespace jzOffer{
         binaryTreeNode* pRight;
     };
 
-    class ti21{};
+    class ti23{
+        public:
+            void printBSTFromUpToDown(binaryTreeNode* tree);
+    };
+
+    template<typename T>
+    class ti21{
+        public:
+            T topAndPop(){
+                if(sta.empty()){
+                    printf("Empty stack!");
+                    return NULL;
+                }
+                T res=sta.top();
+                sta.pop();
+                staMin.pop();
+                return res;
+            }
+
+            void push(T t){
+                sta.push(t);
+                if(staMin.empty() || t<staMin.top())
+                    staMin.push(t);
+                else
+                    staMin.push(staMin.top());
+            }
+
+            T minT(){
+                if(staMin.empty()){
+                    printf("Empty stack!");
+                    return NULL;
+                }
+                return staMin.top();
+            }
+        private:
+            stack<T> sta;
+            stack<T> staMin;
+    };
 
     class ti20{};
 
