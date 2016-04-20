@@ -176,7 +176,9 @@
 
 1459903685 source:/home/zcs/software/zcsGit/learningTest/newcoder/huawei/meitu.cpp
 
-1460471633 source:/home/zcs/software/zcsGit/learningTest/newcoder/huawei/tengXunMoNi.cpp
+1461159479 source:/home/zcs/software/zcsGit/learningTest/newcoder/huawei/tengXunMoNi.cpp
+	<stdio.h>
+	<stdio.h>
 	<iostream>
 	<string>
 	<memory.h>
