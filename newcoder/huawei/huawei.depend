@@ -153,7 +153,26 @@
 	<algorithm>
 	<iostream>
 
-1459870004 source:/home/zcsubuntu/zcsUbuntu/macGit/learningTest/newcoder/huawei/tengXunMoNi.cpp
+1461160454 source:/home/zcsubuntu/zcsUbuntu/macGit/learningTest/newcoder/huawei/tengXunMoNi.cpp
+	<iostream>
+	<string>
+	<memory.h>
+	<math.h>
+	<iostream>
+	<stdio.h>
+	<iostream>
+	<algorithm>
+	<stdio.h>
+	<malloc.h>
+	<stdlib.h>
+	<queue>
+	<stack>
+	<iostream>
+	<iostream>
+	<string>
+	<string.h>
+	<iostream>
+	<string>
 	<iostream>
 	<string>
 	<iostream>
@@ -208,4 +227,6 @@
 	<string>
 	<iostream>
 	<string>
+
+1459870752 source:/home/zcsubuntu/zcsUbuntu/macGit/learningTest/newcoder/huawei/meitu.cpp
 

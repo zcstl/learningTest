@@ -3,33 +3,50 @@
     N个孩子,随机分到一个随机数,现在分糖给他们,数字大的孩子比相邻数字小的孩子
     得到的糖要多,至少要多个糖
     同时编写测试用例
+
+    思路：
+    1.暴力解决：初始化sugar数组为0，每次遍历child数组（糖=0的部分）得到最小随机数的child，
+    查看两边，给他个最小值。由于每次遍历整个数组，t复杂度为O(n*n)
+
+    2.**类似于大根堆的中序遍历，找到最大值，然后分为左右两子树，然后递归，递归终止条件为
+    low=high，此时分配low对应child的糖果，递归程序末尾再计算该次递归最大值对应的child的
+    糖果，t复杂度为O(nlogn).   这种程序流的好处是先把最小数字的child分配糖果，，这句是废话
 **/
 #include <stdio.h>
-#define sugar(x) outputSugarForOne(randArr, sugarNum, x)
+#define sugar(x) outputSugarForOne(randArr, sugarNum, x, len)
 
-void outputSugarForOne(int * randArr, int* sugarNum, int x){
+void outputSugarForOne(int * randArr, int* sugarNum, int x, int len){
+    //
+    if(len==1){sugarNum[0]=1;return;}
     if(x==0){
         if(randArr[x]>randArr[x+1])
-            randArr[x]=sugarNum[x+1]+1;
+            randArr[x]=++sugarNum[x+1];
+        else
+            sugarNum[x]=1;
+        return;
+    }
+    //
+    if(x== len-1){
+        if(randArr[x]>randArr[x-1])
+            randArr[x]=++sugarNum[x-1];
         else
             sugarNum[x]=1;
         return;
     }
 
-    int left=randArr[x-1];
-    int right=randArr[x+1];
+    int right=randArr[x+1], rightSugar=sugarNum[x+1], left=randArr[x-1], leftSugar=sugarNum[x-1];
     if(randArr[x]<left && randArr[x]<right){
         sugarNum[x]=1;
         return;
     }
     if(randArr[x]>left && randArr[x]>right){
-        sugarNum[x]=sugarNum[x-1]>sugarNum[x+1]?sugarNum[x-1]:sugarNum[x+1]+1;
+        sugarNum[x]=leftSugar>rightSugar?leftSugar:rightSugar+1;
         return;
     }
     if(randArr[x]>left)
-        sugarNum[x]=sugarNum[x-1]+1;
+        sugarNum[x]=++leftSugar;
     if(randArr[x]>right)
-        sugarNum[x]=sugarNum[x+1]+1;
+        sugarNum[x]=++rightSugar;
 }
 
 int getMaxOneIndex(int* randArr, int low, int high){
@@ -38,7 +55,6 @@ int getMaxOneIndex(int* randArr, int low, int high){
         if(randArr[i]>randArr[res])
             res=i;
     return res;
-
 }
 
 int getSugatNum(int* sugarNum, int len){
@@ -51,7 +67,7 @@ int getSugatNum(int* sugarNum, int len){
     return res;
 }
 
-void outputTang(int * randArr, int* sugarNum, int low, int high){
+void outputTang(int * randArr, int* sugarNum, int low, int high, int len){
     if(randArr==nullptr || sugarNum==nullptr || low>high)
         return;
     if(low==high){
@@ -59,8 +75,8 @@ void outputTang(int * randArr, int* sugarNum, int low, int high){
         return;
     }
     int mid=getMaxOneIndex(randArr, low, high);
-    outputTang(randArr, sugarNum, low, mid-1);
-    outputTang(randArr, sugarNum, mid+1, high);
+    outputTang(randArr, sugarNum, low, mid-1, len);
+    outputTang(randArr, sugarNum, mid+1, high, len);
     sugar(mid);
 }
 
@@ -69,13 +85,13 @@ void outputTang(int * randArr, int* sugarNum, int low, int high){
 int main(){
     int randArr[9]={1,3,2,6,9,6,3,4,2};
     int sugarNum[9]={0};
-    outputTang(randArr,sugarNum,0,8);
-    printf("%d\n",getSugatNum(sugarNum, 8));
+    outputTang(randArr,sugarNum,0,8,9);
+    printf("%d\n",getSugatNum(sugarNum, 9));
 
 
     int randArr1[3]={1,3,2};
     int* sugarNum1=nullptr;
-    outputTang(randArr1,sugarNum1,0,2);
+    outputTang(randArr1,sugarNum1,0,2,3);
     printf("%d\n",getSugatNum(sugarNum1, 3));
 }
 
