@@ -2,6 +2,25 @@
 #include <array>
 #include <vector>
 #include <memory.h>
+
+/**
+    打印二叉树中和为某个值的路径，路径指root到leaf途径节点；
+
+    思路：
+    1.通过谦虚遍历很方便判断是否存在该路径，但打印不会 @1
+    2.
+**/
+//@1
+bool jzOffer::ti25::findPath(jzOffer::binaryTreeNode* a, int n){
+    if(a==nullptr)
+        return false;
+    if(a->val==n)
+        return true;
+    if((n-=a->val) < 0)
+        return false;
+    return findPath(a->pLeft, n)||findPath(a->pRight, n);
+}
+
 /**
     从上往下打印二叉树
 

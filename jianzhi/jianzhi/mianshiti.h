@@ -21,6 +21,11 @@ namespace jzOffer{
         binaryTreeNode* pRight;
     };
 
+    class ti25{
+        public:
+            bool findPath(binaryTreeNode* tree, int scroe);
+    };
+
     class ti23{
         public:
             void printBSTFromUpToDown(binaryTreeNode* tree);
