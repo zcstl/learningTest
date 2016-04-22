@@ -35,6 +35,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="alibishi.cpp" />
+		<Unit filename="baidubishi.cpp" />
 		<Unit filename="huaWei201601.cpp" />
 		<Unit filename="huaWei201602.cpp" />
 		<Unit filename="huawei20162.cpp" />

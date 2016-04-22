@@ -23,6 +23,7 @@
     3.递归的时候，有些条件判断，其实只要第一次判断就足够了，这个时候可以写个包裹函数专用于这种条件判断，
     然后再调用递归程序。
 **/
+/*
 #include <stdio.h>
 #define sugar(x) outputSugarForOne(randArr, sugarNum, x, len)
 //**
