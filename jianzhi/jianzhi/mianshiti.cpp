@@ -2,25 +2,185 @@
 #include <array>
 #include <vector>
 #include <memory.h>
+#include <utility>
+using namespace jzOffer;
+/**
+    字符串的排列
+    输入一个字符串，打印出该字符串的所有排列
+
+    思路：
+    1.用一个char[256]数组保存某元素是否被打印的信息，然后for循环，递归，但重复元素没有考虑，
+    @1为为考虑dup元素的代码实现
+    2.
+**/
+
+
+/*@1
+void Ti28::charPermutation(char* a, int len){
+    if(a==nullptr || len<1)
+        return;
+    char isDup[256]={0};
+    int pLen(0);
+    charPermutation_(a, len, isDup, pLen);
+}
+
+void Ti28::charPermutation_(char* a, int len, char* & isDup, int pLen){
+    for(int i(0); i<len; ++i)
+        if(isDup[a[i]]==0)
+            isDup[a[i]]=1, printf("%c ", a[i]), ++pLen, charPermutation_(a, len isDup, pLen);
+        else if(pLen==len)
+            printf("\n");
+}
+*/
+/**
+    将bst转换为双向链表，要求只能调整树节点的指针
+
+    思路：
+    以下两种方法时间复杂度在同一个量级，但第一个的系数理论上低一些
+    1.自己的实现，基于中序遍历，引入改变指针的操作，但由于左右子树返回的值不同，
+    左子树返回大值，右子树返回最小值，故写两个函数递归；
+    1.1.处于函数栈消耗的考虑，可以改为非递归形式；
+
+    2.基于中序遍历，维护一个指针，其指向已经建立好的链表的最后一个元素
+**/
+binaryTreeNode* Ti27::bstToDoubleList(binaryTreeNode* t){
+    if(t==nullptr)return nullptr;
+    auto left=bstToDoubleList(t->pLeft);
+    exchange(left, t);
+    auto right=bstToDoubleListRight(t->pRight);
+    exchange(t, right);
+    if(right==nullptr)
+        return t;
+    else
+        return right;
+}
+
+binaryTreeNode* Ti27::bstToDoubleListRight(binaryTreeNode* t){
+    if(t==nullptr)return nullptr;
+    auto left=bstToDoubleList(t->pLeft);
+    exchange(left, t);
+    auto right=bstToDoubleListRight(t->pRight);
+    exchange(t, right);
+    if(left==nullptr)
+        return t;
+    else
+        return left;
+}
+
+void Ti27::exchange(binaryTreeNode* a, binaryTreeNode* b){
+    if(a==nullptr || b==nullptr)
+        return;
+    a->pRight=b;
+    b->pLeft=a;
+}
+
+/**
+    复杂链表的复制，node中有一个指针，可以指向任意节点或者为nullptr
+
+    细节：pSibling可以指向自己
+
+    思路：
+    1.以标准链表的copy为基础，用一个vactor<pair<Node*, Node*>>维护旧节点和新节点的地址，每复制一个节点，先查找该vector是否已经创建过，
+    若没有则创建node，并push_back；并且查看slibling是否在该vector中，没有则创建并压入；
+    t.O(n*n),但系数比第二个小，然并卵
+
+    2.一般的思路：先按照一般的链表copy，然后从头开始，每跟新一个slibling遍历原链表和新链表一次，t为O(n*n);
+
+    **3.先按照一般链表进行copy，只不过产生形如，a-a'-b-b'-c-c'的结构，a为旧链表，a'为新链表，然后更新slibling也会更加
+    方便。分解为如下三个子问题：产生该结构链表，更新slibling，拆分链表。t为O(n)。
+**/
+ComplexListNode* Ti26::clone(ComplexListNode* n){
+    if(n==nullptr)return nullptr;
+    //处理第一个节点
+    ComplexListNode* pOld(nullptr), *pAhead(nullptr), *res(nullptr), *tmp(nullptr), **temp(&tmp);
+    vector<pair<ComplexListNode*, ComplexListNode*>> nodes;
+    nodes.resize(100);
+    pAhead=res=new ComplexListNode;
+    pAhead->val=n->val;
+    pOld=n->pNext;
+    nodes.push_back(make_pair(n, pAhead));
+    //第一个节点的sibling
+    if(n->pSibling!=nullptr)
+        if(n->pSibling!=n){
+            tmp=new ComplexListNode;
+            tmp->val=n->pSibling->val;
+            pAhead->pSibling=tmp;
+            nodes.push_back(make_pair(n->pSibling, tmp));
+        }else
+            n->pSibling=n;
+    //循环处理每个节点
+    while(pOld!=nullptr){
+        if(isContain(nodes, pOld, temp))
+            pAhead->pNext=tmp, pAhead=tmp, pOld=pOld->pNext;
+        else{
+            tmp=new ComplexListNode;
+            tmp->val=pOld->val;
+            pAhead->pNext=tmp, pAhead=tmp, pOld=pOld->pNext;
+            nodes.push_back(make_pair(pOld, tmp));
+        }
+        if(pAhead->pSibling!=nullptr)
+            if(!isContain(nodes, pAhead->pSibling, temp))
+            {
+                tmp=new ComplexListNode;
+                tmp->val=n->pSibling->val;
+                pAhead->pSibling=tmp;
+                nodes.push_back(make_pair(n->pSibling, tmp));
+            }else
+                pAhead->pSibling=tmp;
+    }
+    //
+    pAhead->pNext==nullptr;
+    return res;
+}
+
+bool Ti26::isContain(vector<pair<ComplexListNode*, ComplexListNode*>>& nodes, ComplexListNode* o, ComplexListNode** n){
+    for(auto tmp: nodes)
+        if(tmp.first==o){
+            *n=tmp.second;
+            return true;
+        }
+    return false;
+}
 
 /**
     打印二叉树中和为某个值的路径，路径指root到leaf途径节点；
 
     思路：
-    1.通过谦虚遍历很方便判断是否存在该路径，但打印不会 @1
-    2.
+    通过前序遍历寻找路径，使用vector保存路径信息，节点的push和pop相当于当做stack,
+    打印相当于当做array使用。
 **/
 //@1
 bool jzOffer::ti25::findPath(jzOffer::binaryTreeNode* a, int n){
     if(a==nullptr)
         return false;
-    if(a->val==n)
-        return true;
-    if((n-=a->val) < 0)
-        return false;
-    return findPath(a->pLeft, n)||findPath(a->pRight, n);
+    vector<int> path;
+    path.resize(100);
+    return findPath_(a, n, path);
 }
-
+bool jzOffer::ti25::findPath_(jzOffer::binaryTreeNode* a, int n, vector<int>& path){
+    int val=a->val;
+    if(val>n)
+        return false;
+    path.push_back(val);
+    if(val==n)
+        if(a->pLeft==nullptr && a->pRight==nullptr){
+            for(auto tmp: path)
+                printf("%d ", tmp);
+            printf("\n");
+            path.pop_back();
+            return true;
+        }else{
+            path.pop_back();
+            return false;
+        }
+    else{
+        n-=val;
+        bool left=a->pLeft!=nullptr&&findPath_(a->pLeft, n, path);
+        bool right=a->pRight!=nullptr&&findPath_(a->pRight, n, path);
+        path.pop_back();
+        return left||right;
+    }
+}
 /**
     从上往下打印二叉树
 

@@ -8,6 +8,9 @@
 #include <exception>
 using namespace std;
 
+/**
+    注：此类名首字母都没有大写
+**/
 namespace jzOffer{
 
     struct listNode{
@@ -21,9 +24,39 @@ namespace jzOffer{
         binaryTreeNode* pRight;
     };
 
+    struct ComplexListNode{
+        int val;
+        ComplexListNode* pNext;
+        ComplexListNode* pSibling;
+    };
+
+    class Ti28{
+        public:
+            void charPermutation(char* str, int len);
+        private:
+            void charPermutation_(char* str, int len, char* & isDup, int pLen);
+    };
+
+    class Ti27{
+        public:
+            binaryTreeNode* bstToDoubleList(binaryTreeNode* tree);
+        private:
+            binaryTreeNode* bstToDoubleListRight(binaryTreeNode* tree);
+            void exchange(binaryTreeNode* a, binaryTreeNode* b);
+    };
+
+    class Ti26{
+        public:
+           ComplexListNode* clone(ComplexListNode* pHead);
+        private:
+            bool isContain(vector<pair<ComplexListNode*, ComplexListNode*>>& nodes, ComplexListNode* oldNode, ComplexListNode** newNode);
+    };
+
     class ti25{
         public:
             bool findPath(binaryTreeNode* tree, int scroe);
+        private:
+            bool findPath_(binaryTreeNode* tree, int scroe, vector<int>& path);
     };
 
     class ti23{
