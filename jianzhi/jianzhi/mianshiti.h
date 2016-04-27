@@ -30,6 +30,20 @@ namespace jzOffer{
         ComplexListNode* pSibling;
     };
 
+    class Ti30{
+        public:
+            void getSmallestNums(int* nums, int low, int high, int n, int(*func)(int*, int, int));
+        private:
+            int Partition(int* nums, int low, int high, int(*func)(int*, int, int));
+            void getSmallestNums_(int* nums, int low, int high, int n,int(*func)(int*, int, int));
+            //int getPivot(int* nums, int low, int high);
+    };
+
+    class Ti29{
+        public:
+            int moreThanHalfNum(int * nums, int len);
+    };
+
     class Ti28{
         public:
             void charPermutation(char* str, int len);

@@ -5,6 +5,77 @@
 #include <utility>
 using namespace jzOffer;
 /**
+    最小的k个数
+
+    思路：
+    1.快排的多次partition求第k大的数，其左边就是最小的k个数
+**/
+
+int getPivot(int* nums, int low, int high){
+    return low;
+}
+
+void Ti30::getSmallestNums(int* nums, int low, int high, int n, int(*func)(int*, int, int)){
+    if(nums==nullptr || func==nullptr || low<0 || (high-low)+1>n || low>high || n<1)
+        return;
+    getSmallestNums_(nums, low, high, n, func);
+    for(int i(0); i<n; ++i)
+        printf("%d ", nums[i]);
+    printf("\n");
+}
+
+void Ti30::getSmallestNums_(int* nums, int low, int high, int n, int(*func)(int*, int, int)){
+    int mid=Partition(nums, low, high, func);
+    if(mid>n)
+        getSmallestNums_(nums, low, mid-1, n, func);
+    else if(mid<n)
+            getSmallestNums_(nums, mid+1, high, n, func);
+            else
+                return;
+}
+
+int Ti30::Partition(int* nums, int low, int high, int(*func)(int*, int, int)){
+    int pivotPos=func(nums, low, high);
+    int pivot=nums[pivotPos];/**保存枢纽元数值，且枢纽元保存在first位置时，先从high开始，最后下标的位置便是枢纽元的位置**/
+    swap(nums[low], nums[pivotPos]);
+    while(low<high){
+        while(nums[high]>=pivot && low<high)--high;
+        swap(nums[high], nums[low]);
+        while(nums[low]<=pivot && low<high)++low;
+        swap(nums[low], nums[high]);
+    }
+    swap(nums[low], pivot);
+    return pivotPos;
+}
+
+/**
+    数组中出现次数超过一半的数字
+
+    思路：
+    1.超过一半的数字，一次遍历数组，维护两个变量即可
+    2.基于快速排序的多次partition，可以O(n)得到任意第k大的数字，
+    超过一半的数字，即第n/2大的数字。
+
+    **细节：检查是否为超过一般的数字,传达这种错误信息可以用过返回值，全局变量或异常实现
+**/
+int Ti29::moreThanHalfNum(int * nums, int len){
+    if(nums==nullptr || len<1)
+        return -1;  //
+    int n(nums[0]);
+    for(int i(0), c(0); i<len; ++i)
+        if(nums[i]==n)
+            ++c;
+        else if(--c==0)
+                n=nums[i], ++c;
+    //check
+    int total(0);
+    for(int i(0); i<len; ++i)
+        if(nums[i]==n)++total;else --total;
+    if(total<1)n=-1, printf("Don't have!!");
+    return n;
+}
+
+/**
     字符串的排列
     输入一个字符串，打印出该字符串的所有排列
 
