@@ -30,9 +30,18 @@ namespace jzOffer{
         ComplexListNode* pSibling;
     };
 
+    class Ti32{
+        int numberOf1Between1AndN(int n);
+    };
+
+    class Ti31{
+        public:
+            int getMaxChildArray(int* nums, int len);
+    };
+
     class Ti30{
         public:
-            void getSmallestNums(int* nums, int low, int high, int n, int(*func)(int*, int, int));
+            void getSmallestNums(int* nums, int len, int n, int(*func)(int*, int, int));
         private:
             int Partition(int* nums, int low, int high, int(*func)(int*, int, int));
             void getSmallestNums_(int* nums, int low, int high, int n,int(*func)(int*, int, int));

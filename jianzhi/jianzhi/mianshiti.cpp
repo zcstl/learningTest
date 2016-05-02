@@ -4,6 +4,45 @@
 #include <memory.h>
 #include <utility>
 using namespace jzOffer;
+
+/**
+    1到N这N个数字中1出现的次数
+
+    思路：
+    1.对1到N共N个数字进行分析，逐个累加1的个数，判断一的个数模10除10便行；t O(nlogn)
+    2.严密的数学思维能力，找出规律，，，找出该规律很难
+**/
+
+
+/**
+    求子数组最大和
+
+    思路：
+    1.分析子数组从begin位置开始，逐个求最大值的过程，会发现求值的规律；
+    2.使用DP，用f(i)表示以第i个元素结尾的子数组的最大和,把以每个元素结尾的子数组的最大和求出来，
+    最大值便是该数组的子数组最大值。
+    两种思路异曲同工
+**/
+int Ti31::getMaxChildArray(int* nums, int len){
+    if(nums==nullptr || len<1){
+        printf("Bad input or null ptr!!");
+        return -1;
+    }
+    int maxValue(0), flag(0), partMax(0);
+    for(int i(0); i<len; ++i){
+        if(partMax<0)
+            partMax=nums[i];
+        else
+            partMax+=nums[i];
+        if(partMax>=maxValue)
+            maxValue=partMax, flag=1;
+    }
+    if(flag==1)
+        return maxValue;
+    else
+        return nums[0];
+}
+
 /**
     最小的k个数
 
@@ -11,14 +50,10 @@ using namespace jzOffer;
     1.快排的多次partition求第k大的数，其左边就是最小的k个数
 **/
 
-int getPivot(int* nums, int low, int high){
-    return low;
-}
-
-void Ti30::getSmallestNums(int* nums, int low, int high, int n, int(*func)(int*, int, int)){
-    if(nums==nullptr || func==nullptr || low<0 || (high-low)+1>n || low>high || n<1)
+void Ti30::getSmallestNums(int* nums, int len, int n, int(*func)(int*, int, int)){
+    if(nums==nullptr || func==nullptr || len<1 || n<1)
         return;
-    getSmallestNums_(nums, low, high, n, func);
+    getSmallestNums_(nums, 0, len-1, n, func);
     for(int i(0); i<n; ++i)
         printf("%d ", nums[i]);
     printf("\n");
@@ -45,7 +80,7 @@ int Ti30::Partition(int* nums, int low, int high, int(*func)(int*, int, int)){
         swap(nums[low], nums[high]);
     }
     swap(nums[low], pivot);
-    return pivotPos;
+    return low;
 }
 
 /**

@@ -1,6 +1,25 @@
 #include <iostream>
 #include "mianshiti.h"
 using namespace std;
+
+int main31(){
+    jzOffer::Ti31 test;
+    int nums[]={1,-2,3,10,-4,7,2,-5};
+    cout<<test.getMaxChildArray(nums, 8)<<endl;
+}
+
+/**
+    getPivot声明放在mianshiti.h中，实现放在.cpp中，使用其会报错
+**/
+int getPivot(int* nums, int low, int high){
+    return low;
+}
+int main30(){
+    jzOffer::Ti30 test;
+    int nums[]={1,2,7,5,6,3,4,9,10,8};
+    test.getSmallestNums(nums, 10, 3, getPivot);
+}
+
 int main21(){
     jzOffer::ti21<int> test;
     test.push(2);
@@ -117,5 +136,5 @@ int main6()
 }
 
 int main(){
-    main21();
+    main31();
 }
