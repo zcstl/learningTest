@@ -2,6 +2,20 @@
 #include "mianshiti.h"
 using namespace std;
 
+int main36(){
+    jzOffer::Ti36 test;
+    int nums[]={7, 5, 6, 4};
+    test.countInversePairs(nums, 0, 3);
+    //int nums1[]={2,1};
+    //test.countInversePairs(nums1, 0, 1);
+}
+
+int main33(){
+    jzOffer::Ti33 test;
+    int nums[]={3, 23, 123};
+    test.smallestNumsArrPermutation(nums, 3);
+}
+
 int main31(){
     jzOffer::Ti31 test;
     int nums[]={1,-2,3,10,-4,7,2,-5};
@@ -136,5 +150,5 @@ int main6()
 }
 
 int main(){
-    main31();
+    main36();
 }

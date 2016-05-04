@@ -30,8 +30,33 @@ namespace jzOffer{
         ComplexListNode* pSibling;
     };
 
+    class Ti36{
+        public:
+            int countInversePairs(int* nums, int low, int high);
+        private:
+            int count_;
+            void countInversePairs_(int* nums, int* tmp, int low, int high);
+            void merge_(int* nums, int* tmp, int low, int mid, int high);
+    };
+
+    class Ti35{
+
+    };
+
+    class Ti34{
+
+    };
+
+    class Ti33{
+        public:
+            int smallestNumsArrPermutation(int* nums, int len);
+        private:
+            int getHighMinOf2(const int* const &nums, char* const &flag, int minTmp, int j);
+    };
+
     class Ti32{
-        int numberOf1Between1AndN(int n);
+        public:
+            int numberOf1Between1AndN(int n);
     };
 
     class Ti31{

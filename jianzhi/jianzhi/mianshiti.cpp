@@ -6,6 +6,140 @@
 using namespace jzOffer;
 
 /**
+    计算数组中逆序对的个数
+
+    思路：
+    1.暴力解决，两个for循环，t.O(n*n)
+    2.使用归并排序，t.O(nlogn), 思路：分解，合并的过程中先统计逆序对数目，再合并
+
+**/
+int Ti36::countInversePairs(int* nums, int low, int high){
+    if(nums==nullptr || low<0 || high<low){printf("bad input!!");return -1;}
+    //
+    count_=0;
+    int* tmp=new int[high-low+1];
+    memset(tmp, 0, sizeof(int)*(high-low+1));
+    int* numsTmp=new int[high-low+1];
+    for(int i(low), j(0); i<=high; ++i, ++j)numsTmp[j]=nums[i];
+    //
+    countInversePairs_(numsTmp, tmp, 0, high-low);
+    for(int i(0); i<high-low+1; ++i)printf("%d ", numsTmp[i]);
+    printf("\n%d\n", count_);
+    return count_;
+}
+/**分解**/
+void Ti36::countInversePairs_(int* nums,int* tmp, int low, int high){
+    if(low<high){
+        int mid=(low+high)/2;
+        countInversePairs_(nums, tmp, low, mid);
+        countInversePairs_(nums, tmp, mid+1, high);
+        merge_(nums, tmp, low, mid, high);
+    }
+}
+/**归并**/
+void Ti36::merge_(int* nums, int* tmp,int low, int mid, int high){
+    //
+    for(int i(low); i<=high; ++i)tmp[i]=nums[i];
+    /**统计逆序对和两路归并排序操作分开，无法同时完成**/
+    for(int i(low); i<=mid; ++i)
+        for(int j(mid+1); j<=high; ++j)
+            if(nums[i]>nums[j])
+                ++count_;
+            else
+                break;
+    //
+    int i(low), j(mid+1), m(low);
+    //
+    for( ; i<=mid && j<=high; ++m){
+        if( tmp[i]<=tmp[j])
+            nums[m]=tmp[i], ++i;
+        else
+            nums[m]=tmp[j], ++j;
+    }
+    //
+    while(i<=mid)nums[m++]=tmp[i++];
+    while(j<=high)nums[m++]=tmp[j++];
+}
+
+
+/**
+    第一个只出现一次的字符
+**/
+
+
+/**
+    丑数
+**/
+
+
+
+/**
+    把数组排成最小的数，输入一个数组，输出该数组能够排列成一个数字的min
+
+    思路：
+    1.逐个选出最高位最小的数字作为目的值的高位，若两个数最高位相同，依次比较次高位
+    1.1.一下实现可以完成123， 23， 3这种情况，但3， 32， 321便不行，若改正则比较麻烦
+    2.
+
+    宏定义的学习
+**/
+#define convertToStringJzOfferTi33(b, a)     \
+{   tmp=b, index=0;     \
+    while(tmp){a[index]=tmp%10; tmp/=10;}   \
+    for(int i(0), j(a.size()); i<j; ++i, --j){  \
+            swap(a[i], a[j]);\
+    }   \
+}
+
+int Ti33::smallestNumsArrPermutation(int* nums, int len){
+    if(nums==nullptr || len<1){
+        printf("Bad input!!");
+        return -1;
+    }
+    int* resNums=new int[len];
+    char* flag=new char[len];
+    int res(0);
+    for(int i(0), minTmp(0); i<len; ++i){
+        for(int j(0); j<len; ++j){
+            minTmp=getHighMinOf2(nums, flag, minTmp, j);
+        }
+        flag[minTmp]=1;
+        resNums[i]=nums[minTmp];
+        //findSamllest(nums, flag, len);
+        printf("%d",resNums[i]);
+    }
+    printf("\n");
+    delete []flag;
+    delete []resNums;
+    return res;//
+}
+
+int Ti33::getHighMinOf2(const int* const &nums, char* const &flag, int minTmp, int j){
+    if(flag[j]==1)
+        return minTmp;
+    else if(flag[minTmp]==1)
+        return j;
+    if(nums[j]==nums[minTmp])
+        return j;
+    string a, b;
+    int tmp, index;
+    convertToStringJzOfferTi33(nums[minTmp], a);
+    convertToStringJzOfferTi33(nums[j], b);
+    //
+    int siz=a.size()>b.size()?b.size():a.size();
+    for(int i(0); i<siz; ++i){
+        if(a[i]<b[i]){
+            flag[minTmp]=1;
+            return minTmp;
+        }else if(a[i]>b[i]){
+                flag[j]=1;
+                return j;
+        }
+    }
+    return minTmp;
+}
+
+/**
     1到N这N个数字中1出现的次数
 
     思路：
