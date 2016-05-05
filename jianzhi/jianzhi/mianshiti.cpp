@@ -5,6 +5,44 @@
 #include <utility>
 using namespace jzOffer;
 
+
+/**
+    找到两个链表第一个公共节点，链表为普通链表
+
+    思路：
+    遍历两个链表，把地址赋给指针数组，然后往后遍历两个数组，找到第一个不同值的下标，其后一个便是。
+    如何把指针变量的值当做int赋值给int？
+**/
+listNode* Ti37::findFirstCommonNodeFrom2Lists(listNode* l1, listNode* l2){
+    if(l1==nullptr || l2==nullptr){
+        printf("Bad inputs!!");
+        return nullptr;
+    }
+    //32bit 用int存储地址， 64bit则用long long
+    int i(0), len1(0), len2(0);
+    listNode* tmpPtr(nullptr);
+    for(tmpPtr=l1; tmpPtr!=nullptr; tmpPtr=tmpPtr->pNext)++len1;
+    listNode** arr1=new listNode*[len1];
+    for(tmpPtr=l1, i=0; tmpPtr!=nullptr; tmpPtr=tmpPtr->pNext)arr1[i++]=tmpPtr;
+    //
+    for(tmpPtr=l2, i=0; tmpPtr!=nullptr; tmpPtr=tmpPtr->pNext)++len2;
+    listNode** arr2=new listNode*[len2];
+    for(tmpPtr=l2, i=0; tmpPtr!=nullptr; tmpPtr=tmpPtr->pNext)arr2[i++]=tmpPtr;
+    //
+    i=-1;
+    for(int m(len1-1), n(len2-1); m>=0 && n>=0; --m, --n)
+        if(arr1[m]!=arr2[n]){
+            i=m;
+            break;
+        }
+    delete []arr1;
+    delete []arr2;
+    if(i!=-1)
+        return arr1[++i];
+    else
+        return nullptr;
+}
+
 /**
     计算数组中逆序对的个数
 

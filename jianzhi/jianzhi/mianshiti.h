@@ -30,6 +30,11 @@ namespace jzOffer{
         ComplexListNode* pSibling;
     };
 
+    class Ti37{
+        public:
+            listNode* findFirstCommonNodeFrom2Lists(listNode* list1, listNode* list2);
+    };
+
     class Ti36{
         public:
             int countInversePairs(int* nums, int low, int high);

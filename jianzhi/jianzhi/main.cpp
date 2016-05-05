@@ -2,6 +2,11 @@
 #include "mianshiti.h"
 using namespace std;
 
+int main37(){
+    jzOffer::Ti37 test;
+
+}
+
 int main36(){
     jzOffer::Ti36 test;
     int nums[]={7, 5, 6, 4};
