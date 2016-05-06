@@ -2,6 +2,18 @@
 #include "mianshiti.h"
 using namespace std;
 
+int greyTest(){
+    jzOffer::GreyCode test;
+    test.getGreyCodePlus(3);
+    test.getGreyCode(1);
+}
+
+int main39(){
+    jzOffer::Ti39 test;
+    jzOffer::binaryTreeNode* a, b, c, d;
+
+}
+
 int main37(){
     jzOffer::Ti37 test;
 
@@ -155,5 +167,5 @@ int main6()
 }
 
 int main(){
-    main36();
+    greyTest();
 }

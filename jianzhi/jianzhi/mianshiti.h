@@ -24,10 +24,25 @@ namespace jzOffer{
         binaryTreeNode* pRight;
     };
 
+
     struct ComplexListNode{
         int val;
         ComplexListNode* pNext;
         ComplexListNode* pSibling;
+    };
+
+    class GreyCode{
+        public:
+            int* getGreyCode(int n);
+            void getGreyCodePlus(int n);
+        private:
+            void swtichToNum(int *resNUm, char** res, int n);
+    };
+
+    class Ti39{
+        public:
+            int heightOfBinaryTree(binaryTreeNode* tree);
+            int isBinaryTreeBalance(binaryTreeNode* tree);
     };
 
     class Ti37{

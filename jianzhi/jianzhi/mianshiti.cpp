@@ -3,7 +3,83 @@
 #include <vector>
 #include <memory.h>
 #include <utility>
+#include <math.h>
 using namespace jzOffer;
+/**
+    格雷码
+
+    1.找规律，抓住对称性，下标计算，非递归实现
+    1.1.重构代码，最好把下标操作简化,找bug
+    2.数学规律，从0到n，每个数字与其右移一位后的值做抑或
+**/
+void GreyCode::getGreyCodePlus(int n){
+    if(n<1)return;
+    for(int i(0); i<pow(2,n); ++i)
+        printf("%d\n", i^i>>1);
+}
+
+int* GreyCode::getGreyCode(int n){
+    if(n<1)return nullptr;
+    int rowN=pow(2, n);
+    char** res=new char*[rowN];
+    for(int i(0); i<rowN; ++i)
+        res[i]=new char[n+1], memset(res[i], 0, sizeof(char)*(n+1)), res[i][n]='\0';
+    res[0][n-1]='0', res[1][n-1]='1';
+
+    //
+    for(int i(1); i<n; ++i)
+        for(int j=pow(2, i), m=1, th=pow(2, i+1); j<th; ++j, m+=2){
+            strcpy(res[j], res[j-m]);
+            res[j][n-1-i]='1';
+        }
+     int* resNum=new int[rowN];
+     memset(resNum, 0, sizeof(int)*n);
+
+     swtichToNum(resNum, res, n);
+     for(int i(0); i<rowN; ++i)
+        delete[]res[i];
+    for(int i(0); i<rowN; ++i)printf("%d\n", resNum[i]);
+     return resNum;
+}
+
+void GreyCode::swtichToNum(int *resNUm, char** res, int n){
+    int rowN=pow(2, n);
+    for(int i(0); i<rowN; ++i)
+        for(int j(n-1); j>=0; --j)
+            resNUm[i]+=res[i][j]*pow(2, n-1-j);
+}
+/**
+    计算二叉树的深度
+    判断二叉树是否平衡
+
+    思路：
+    1.计算深度，递归实现就是前序遍历的改版
+    2.计算深度，若非递归实现，计算层数便可以，广度优先遍历
+    使用vector保存每层节点信息，读完一层节点后，入一个flag，当下标为vector大小减1时，终止循环
+    2.1.也可以把root节点和一个标记放进queue，出队，依次放入左右节点，出队为flag层数加1，然后入队flag，
+    若queue的大小出队前为0，则break
+    3.判断是否平衡：
+**/
+int Ti39::heightOfBinaryTree(binaryTreeNode* t){
+    if(t==nullptr)
+        return -1;
+    vector<binaryTreeNode*> nodes(1000);
+    binaryTreeNode* flag;
+    flag->pLeft==nullptr, flag->pRight=nullptr;
+    int res(0);
+    nodes.push_back(t);
+    nodes.push_back(flag), ++res;
+    int index(0);
+    while(index< (nodes.size()-1)){
+        if(nodes[index]->pLeft!=nullptr)
+            nodes.push_back(nodes[index]->pLeft);
+        if(nodes[index]->pRight!=nullptr)
+            nodes.push_back(nodes[index]->pRight);
+        if(nodes[index++]==flag)
+            nodes.push_back(flag), ++res;
+    }
+    return res;
+}
 
 
 /**
