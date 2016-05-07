@@ -39,10 +39,24 @@ namespace jzOffer{
             void swtichToNum(int *resNUm, char** res, int n);
     };
 
+    class BigNumber{
+        public:
+
+
+
+    };
+
+    class Ti40{
+        public:
+
+    };
+
     class Ti39{
         public:
             int heightOfBinaryTree(binaryTreeNode* tree);
-            int isBinaryTreeBalance(binaryTreeNode* tree);
+            bool isBinaryTreeBalance(binaryTreeNode* tree);
+        private:
+            bool _isBinaryTreeBalance(binaryTreeNode* tree, int* pHeight);
     };
 
     class Ti37{

@@ -5,12 +5,92 @@
 #include <utility>
 #include <math.h>
 using namespace jzOffer;
+
+
+/**
+    数组中只出现一次的数字
+    一个整形数组只有两个数字只出现了一次，其余数字都出现了两次
+    提示：考虑只有一个数字只出现了一次的解法
+
+    思路：
+    1.暴力解决，两次遍历，，，O(n*n)
+    2.考虑只有一个数字只出现了一次的解法，即抑或操作
+    2.1.对于两个只出现一次的数字，若把数组分成两个子数组，每个子数组分别包含一个单独出现的数字，
+    且成对的数字在同一组，便可解决。
+    2.2.如何拆分数组？原数组抑或一边后为两个数抑或的结果，找出第一个为1的bit，按该bit是否为1拆分数组。
+**/
+
+/**
+    大数运算
+
+    思路：
+    数组模拟，倒序模拟，优化：10000进制
+**/
+/**大数相乘**/
+/*
+void twoNumAdd(string& a, string& b);
+
+int main(){
+    //
+    string a, b;
+    cin>>a>>b;
+    //
+    unsigned char aSize=a.size(), bSize=b.size();
+    for(int i(0); i<aSize; ++i)
+        if(a[i]<'0' && a[i]>'9'){
+            cout<<"Bad input!"<<endl;
+            return -1;
+        }
+    for(int i(0); i<bSize; ++i)
+        if(b[i]<'0' && b[i]>'9'){
+            cout<<"Bad input!"<<endl;
+            return -1;
+        }
+    //
+    int maxLen(0), strLen(0), mutiTimes(0);
+    if(aSize>bSize)
+        maxLen=aSize, strLen=aSize*2, mutiTimes=bSize;
+    else
+        maxLen=bSize, strLen=bSize*2, mutiTimes=aSize, a.swap(b);
+
+    //a*b
+    string tmp(strLen, '0'), res(strLen, '0'), tmpTmp=tmp;
+    for(int i(mutiTimes-1); i>=0; --i){
+        int pushNum(0), s1(0), s2(0), xj(0);
+        for(int j(maxLen-1); j>=0; --j){
+            s1=a[j]-'0', s2=b[i]-'0', xj=s1*s2;
+            //cout<<maxLen+j+(i-mutiTimes+1)<<endl;
+            //cout<<(tmp[maxLen+j+(i-mutiTimes+1)]=(xj+pushNum)%10+'0')<<endl;
+            tmp[maxLen+j+(i-mutiTimes+1)]=(xj+pushNum)%10+'0';
+            pushNum=(xj+pushNum)/10;
+        }
+        tmp[maxLen-1-(mutiTimes-1-i)]=pushNum+'0';
+        //cout<<tmp<<endl;
+        twoNumAdd(res, tmp);
+        tmp=tmpTmp;
+    }
+    cout<<res.substr(res.rfind('0')+1)<<endl;
+}
+
+void twoNumAdd(string& a, string& b){
+    int pushNum(0), s1(0), s2(0), xj(0);
+    for(int i(a.size()-1); i>=0; --i){
+        s1=a[i]-'0', s2=b[i]-'0', xj=s1+s2;
+        a[i]=(xj+pushNum)%10+'0';
+        pushNum=(xj+pushNum)/10;
+    }
+}
+*/
+
+
 /**
     格雷码
 
     1.找规律，抓住对称性，下标计算，非递归实现
     1.1.重构代码，最好把下标操作简化,找bug
-    2.数学规律，从0到n，每个数字与其右移一位后的值做抑或
+    2.**数学规律，从0到n，每个数字与其右移一位后的值做抑或
+
+    细节：getGreyCode有两个bug，要注意！！！
 **/
 void GreyCode::getGreyCodePlus(int n){
     if(n<1)return;
@@ -23,30 +103,31 @@ int* GreyCode::getGreyCode(int n){
     int rowN=pow(2, n);
     char** res=new char*[rowN];
     for(int i(0); i<rowN; ++i)
-        res[i]=new char[n+1], memset(res[i], 0, sizeof(char)*(n+1)), res[i][n]='\0';
+        res[i]=new char[n+1], memset(res[i], '0', sizeof(char)*(n+1)), res[i][n]='\0';
+    /**%%memset(res[i], 0, sizeof(char)*(n+1)); ASCII中0表示NULL，也就是'\0'%%**/
     res[0][n-1]='0', res[1][n-1]='1';
-
     //
     for(int i(1); i<n; ++i)
         for(int j=pow(2, i), m=1, th=pow(2, i+1); j<th; ++j, m+=2){
             strcpy(res[j], res[j-m]);
             res[j][n-1-i]='1';
         }
-     int* resNum=new int[rowN];
-     memset(resNum, 0, sizeof(int)*n);
+    int* resNum=new int[rowN];
+    memset(resNum, 0, sizeof(int)*rowN);
 
-     swtichToNum(resNum, res, n);
-     for(int i(0); i<rowN; ++i)
+    swtichToNum(resNum, res, n);
+    for(int i(0); i<rowN; ++i)
         delete[]res[i];
     for(int i(0); i<rowN; ++i)printf("%d\n", resNum[i]);
-     return resNum;
+        return resNum;
 }
 
 void GreyCode::swtichToNum(int *resNUm, char** res, int n){
     int rowN=pow(2, n);
     for(int i(0); i<rowN; ++i)
         for(int j(n-1); j>=0; --j)
-            resNUm[i]+=res[i][j]*pow(2, n-1-j);
+            /**resNUm[i]+=res[i][j]*pow(2, n-1-j);  res[i][j]是一个char，'1'不为1**/
+            resNUm[i]+=(res[i][j]-'0')*pow(2, n-1-j);
 }
 /**
     计算二叉树的深度
@@ -58,8 +139,41 @@ void GreyCode::swtichToNum(int *resNUm, char** res, int n){
     使用vector保存每层节点信息，读完一层节点后，入一个flag，当下标为vector大小减1时，终止循环
     2.1.也可以把root节点和一个标记放进queue，出队，依次放入左右节点，出队为flag层数加1，然后入队flag，
     若queue的大小出队前为0，则break
-    3.判断是否平衡：
+
+    3.判断是否平衡：递归到从底部开始到root节点，计算高度并判断是否平衡
+    小细节：需要传递返回两个值（bool和树的高度），指针传参实现
 **/
+bool Ti39::isBinaryTreeBalance(binaryTreeNode* t){
+    if(t==nullptr){
+        printf("Bad input!");
+        return false;
+    }
+    int h(0);
+    return _isBinaryTreeBalance(t, &h);
+}
+
+bool Ti39::_isBinaryTreeBalance(binaryTreeNode* t, int* pH){
+    if(t==nullptr){
+        *pH==0;
+        return true;
+    }
+    int pHL(0), pHR(0);
+    if(_isBinaryTreeBalance(t->pLeft, &pHL) && _isBinaryTreeBalance(t->pRight, &pHR))
+        if(pHL-pHR!=2 && pHL-pHR!=-2){
+            *pH=pHL>pHR?pHL:pHR+1;
+            return true;
+        }
+    return false;
+    /*
+    bool isR=_isBinaryTreeBalance(t->pRight, &pHL);
+    bool isL=_isBinaryTreeBalance(t->pLeft, &pHR);
+    if(pHL-pHR==2 || pHL-pHR==-2)
+        return false;
+    *pH=pHL>pHR?pHL:pHR+1;
+    return isR&&isL;
+    */
+}
+
 int Ti39::heightOfBinaryTree(binaryTreeNode* t){
     if(t==nullptr)
         return -1;

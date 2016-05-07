@@ -5,7 +5,7 @@ using namespace std;
 int greyTest(){
     jzOffer::GreyCode test;
     test.getGreyCodePlus(3);
-    test.getGreyCode(1);
+    test.getGreyCode(3);
 }
 
 int main39(){
