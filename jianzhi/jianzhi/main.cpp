@@ -2,6 +2,14 @@
 #include "mianshiti.h"
 using namespace std;
 
+int main40(){
+    jzOffer::Ti40 test;
+    int nums[]={1, 2, 4, 5, 4, 1};
+    int a(0), b(0);
+    test.get2NumsOccur1Time(nums, 6, a, b);
+    cout<<a<<" "<<b<<endl;
+}
+
 int greyTest(){
     jzOffer::GreyCode test;
     test.getGreyCodePlus(3);
@@ -167,5 +175,5 @@ int main6()
 }
 
 int main(){
-    greyTest();
+    main40();
 }

@@ -19,6 +19,33 @@ using namespace jzOffer;
     且成对的数字在同一组，便可解决。
     2.2.如何拆分数组？原数组抑或一边后为两个数抑或的结果，找出第一个为1的bit，按该bit是否为1拆分数组。
 **/
+void Ti40::get2NumsOccur1Time(int* nums, int len, int& n1, int& n2){
+    if(nums==nullptr || len<1){
+        printf("Bad input!!");
+        return;
+    }
+    //
+    int muti(0);
+    for(int i(0); i<len; ++i)muti^=nums[i];
+    int posit(1);
+    if(muti==0){
+        printf("Bad input!!");
+        return;
+    }
+    //找到左边第一个1的bit位置
+    while((muti/=2)!=0)++posit;
+    //
+    posit=pow(2, posit-1);
+    int t1(0), t2(0);
+    //根据与该数字与运算结果，分组抑或
+    for(int i(0); i<len; ++i)
+        if( (nums[i]&posit) == posit)
+            t1^=nums[i];
+        else
+            t2^=nums[i];
+    n1=t1, n2=t2;
+}
+
 
 /**
     大数运算

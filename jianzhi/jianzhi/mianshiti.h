@@ -48,7 +48,7 @@ namespace jzOffer{
 
     class Ti40{
         public:
-
+            void get2NumsOccur1Time(int* nums , int len, int& n1, int& n2);
     };
 
     class Ti39{
