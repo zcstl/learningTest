@@ -16,6 +16,8 @@ using namespace jzOffer;
     1.暴力遍历，从1到n/2遍历，，，
     2.借鉴上个问题，ahead和behind初始化为1和2，终止条件是ahead为n/2;
     2.1.这种思路要弄懂！！
+
+    优化：第二个问题中计算连续数字和仍然可以优化
 **/
 #define getNtoM(b, a)
 void Ti41::getChildContinuesNumsToSumNPlus(int n){
