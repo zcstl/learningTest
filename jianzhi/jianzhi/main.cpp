@@ -2,6 +2,15 @@
 #include "mianshiti.h"
 using namespace std;
 
+int main41(){
+    int nums[]={1, 2, 3, 4, 5, 6, 7, 8, 9};
+    jzOffer::Ti41 test;
+    //test.getSumIsSof2Nums(nums, 9, 9);
+    //test.getSumIsSof2NumsPlus(nums, 9, 9);
+    test.getChildContinuesNumsToSumN(25);
+    test.getChildContinuesNumsToSumNPlus(25);
+}
+
 int main40(){
     jzOffer::Ti40 test;
     int nums[]={1, 2, 4, 5, 4, 1};
@@ -175,5 +184,5 @@ int main6()
 }
 
 int main(){
-    main40();
+    main41();
 }

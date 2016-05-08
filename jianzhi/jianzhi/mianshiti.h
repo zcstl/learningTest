@@ -46,6 +46,14 @@ namespace jzOffer{
 
     };
 
+    class Ti41{
+        public:
+            void getSumIsSof2Nums(int* nums, int len, int s);
+            void getSumIsSof2NumsPlus(int* nums, int len, int s);
+            void getChildContinuesNumsToSumN(int n);
+            void getChildContinuesNumsToSumNPlus(int n);
+    };
+
     class Ti40{
         public:
             void get2NumsOccur1Time(int* nums , int len, int& n1, int& n2);

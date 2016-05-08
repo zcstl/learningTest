@@ -6,6 +6,78 @@
 #include <math.h>
 using namespace jzOffer;
 
+/**
+    输入一个增序数组，找出一对和为s的两个数
+    思路：
+    1.遍历，两个for循环，尽量减少无意义的比较，但这种暴力方法仍然难免有很多无意义比较；
+    2.从两边开始遍历，ahead和behind之和大于s，则++ahead，小于s则--behind；
+
+    进阶：输入一个数字S，打印出和为S的连续正数序列
+    1.暴力遍历，从1到n/2遍历，，，
+    2.借鉴上个问题，ahead和behind初始化为1和2，终止条件是ahead为n/2;
+    2.1.这种思路要弄懂！！
+**/
+#define getNtoM(b, a)
+void Ti41::getChildContinuesNumsToSumNPlus(int n){
+    if(n<1)return;
+    if(n%2==1)
+        printf("%d %d\n", n/2, n/2+1);
+    int ahead(1), behind(2), tmpSum(0);
+    while(ahead<n/2){
+        tmpSum=(ahead+behind)*(behind-ahead+1)/2;
+        if(tmpSum<n)
+            ++behind;
+            else if(tmpSum>n)
+                    ++ahead;
+                    else{
+                        for(int m(ahead); m<=behind; ++m)
+                            printf("%d ", m);
+                        printf("\n");
+                        ++ahead;
+                    }
+    }
+}
+
+void Ti41::getChildContinuesNumsToSumN(int n){
+    if(n<1)return;
+    if(n%2==1)
+        printf("%d %d\n", n/2, n/2+1);
+    for(int i(1); i<n/2; ++i)
+        for(int j(i); j<n/2; ++j)
+            if((i+j)*(j-i+1)/2==n){
+                for(int m(i); m<=j; ++m)
+                    printf("%d ", m);
+                printf("\n");
+            }
+}
+
+void Ti41::getSumIsSof2NumsPlus(int* nums, int len, int s){
+    if(nums==nullptr || len<1)return;
+    int ahead(0), behind(len-1);
+    while(ahead<behind)
+        if(nums[ahead]+nums[behind]>s)
+            --behind;
+        else if(nums[ahead]+nums[behind]<s)
+            ++ahead;
+            else
+                break;
+    if(ahead!=behind)
+        printf("%d %d\n", nums[ahead], nums[behind]);
+    printf("No numbers to satisfy it!!");
+}
+
+void Ti41::getSumIsSof2Nums(int* nums, int len, int s){
+    if(nums==nullptr || len<1)return;
+    for(int i(0) ; i<len; ++i)
+        for(int j(len-1); j>i; --j)
+            if(nums[i]+nums[j]<s)
+                break;
+            else if(nums[i]+nums[j]==s){
+                printf("%d %d\n", nums[i], nums[j]);
+                return;
+            }
+    printf("No numbers to satisfy it!!");
+}
 
 /**
     数组中只出现一次的数字
