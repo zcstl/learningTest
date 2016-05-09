@@ -1,6 +1,24 @@
 #include <iostream>
+#include <string.h>
 #include "mianshiti.h"
 using namespace std;
+
+int main43(){
+    jzOffer::Ti43 test;
+    test.printProbabilityOfN(1);
+}
+
+int main42(){
+    jzOffer::Ti42 test;
+    char str[]="i am a student.";
+    cout<<str<<endl;
+    test.rotateWordOfString(str);
+    cout<<str<<endl;
+    test.rotateWordOfStringPlus(str);
+    cout<<str<<endl;
+    test.rotateNcharOfString(str, 4);
+    cout<<str<<endl;
+}
 
 int main41(){
     int nums[]={1, 2, 3, 4, 5, 6, 7, 8, 9};
@@ -184,5 +202,5 @@ int main6()
 }
 
 int main(){
-    main41();
+    main43();
 }

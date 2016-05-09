@@ -46,6 +46,23 @@ namespace jzOffer{
 
     };
 
+    class Ti43{
+        public:
+            void printProbabilityOfN(int n);
+        private:
+            void computeRes(int* res, int n, int cot);
+    };
+
+    class Ti42{
+        public:
+            char* rotateWordOfString(char* cStr);
+            void rotateWordOfStringPlus(char* cStr);
+            void rotateNcharOfString(char* cStr, int n);
+        private:
+            void inverse(char* str, int low, int high);
+
+    };
+
     class Ti41{
         public:
             void getSumIsSof2Nums(int* nums, int len, int s);

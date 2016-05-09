@@ -6,6 +6,115 @@
 #include <math.h>
 using namespace jzOffer;
 
+/**建模（数据结构+方法（内在规律））
+    投掷n个骰子，求出其s的可能值及出现的概率
+
+    思路:
+    1.暴力解决，点数和范围是n到6n，点数的全排列是6对的n次,New个
+    这么大的数组，保存每次递归得到的点数和
+    1.1.没有必要存储全排列的结果，保存和s的次数便可以
+    1.2.此情况下，基于递归的实现，函数栈的消耗不是问题，主要是有6的n次
+    调用，效率问题，，
+    2.**用一个数组保存n-1的s的情况，另外一个数组保存n的s的情况，后者可以
+    由前者直接肌酸得到
+**/
+void Ti43::printProbabilityOfN(int n){
+    if(n<1)return;
+    //char* res=new char[pow(6,n)];
+    //memset(res, '0', pow(6, n));
+    int* res=new int[6*n+1];
+    memset(res, 0, sizeof(int)*(6*n+1));
+    int tmp(0);
+    computeRes(res, n, tmp);
+    for(int i(n); i<=6*n; ++i){
+        printf("%d %f\n", i, res[i]/pow(6,n));
+    }
+}
+
+void Ti43::computeRes(int* res, int n, int cot){
+    if(n==0){
+        ++res[cot];
+        return;
+    }
+    for(int i(1); i<=6; ++i)
+        computeRes(res, n-1, cot+i);
+}
+
+/**
+    翻转一字符串中单词的顺序，例如i like you.   you. like i
+
+    思路：
+    1.直接下标操作，复制到一个辅助数组;下表取值要事先想好，否则容易出错，
+    t.O(n), s.O(n), 并且有bug
+    2.先把原数组逆序排列，在从头遍历，以‘ ’为分隔，再逆序排列，t.O(n), s.O(1)
+    最大的优点是下表操作简洁不容易出错
+
+    进阶：旋转数组，输入一个字符串和n，把左边n个字符放到该字符串的末尾
+    思路：上个问题中的解法2，但要注意n的值
+
+    字符数组总结：
+    char str[]="i am a student."；
+    细节：strlen不含最后一个空字符的大小
+**/
+void Ti42::rotateNcharOfString(char* s, int n){
+    if(s==nullptr){
+        printf("Bad input!");
+        return;
+    }
+    if(n<1)return;
+    int len=strlen(s);
+    if((n=len-n)<1)return;
+    inverse(s, 0, len-1);
+    inverse(s, 0, n-1);
+    inverse(s, n, len-1);
+}
+
+void Ti42::inverse(char* s, int l, int h){
+    while(l<h)
+        s[l]=s[h]^s[l], s[h]=s[l]^s[h], s[l]=s[h--]^s[l++];
+    /**s不能指向常量字符串，否则段错误**/
+}
+
+void Ti42::rotateWordOfStringPlus(char* cStr){
+    if(cStr==nullptr){
+        printf("Bad input!");
+        return;
+    }
+    int len=strlen(cStr);
+    inverse(cStr, 0, len-1);
+    for(int i(0), j(0); j<len; ++j)
+        if(cStr[j]==' ')
+            inverse(cStr, i, j-1), i=j+1;
+        else if(j==len-1)
+            inverse(cStr, i, j);
+}
+
+char* Ti42::rotateWordOfString(char* cStr){
+    if(cStr==nullptr){
+        printf("Bad input!");
+        return nullptr;
+    }
+    int len=strlen(cStr);
+    char* tmpStr=new char[len];
+    tmpStr[len-1]='\0';
+    for(int i(0); i<len-1; ){/**下标操作复杂**/
+        for(int j(i); j<=len-1; ++j)
+            if(cStr[j]==' ' || j==len-1){
+                for(int n(i); n<j; ++n)
+                    tmpStr[len-1-j+(n-i)]=cStr[n];
+                if(j!=len-1){
+                    tmpStr[len-1-j-1]='\0', i=++j;
+                }
+                else{
+                    i=j;
+                }
+                break;
+            }
+    }
+    return tmpStr;
+}
+
+
 /**
     输入一个增序数组，找出一对和为s的两个数
     思路：
