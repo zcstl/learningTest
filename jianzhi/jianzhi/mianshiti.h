@@ -46,9 +46,20 @@ namespace jzOffer{
 
     };
 
+    class Ti45{
+        public:
+            int lastRemaining(int n, int m);
+    };
+
+    class Ti44{
+        public:
+            bool isSequence(int* playingCards);
+    };
+
     class Ti43{
         public:
             void printProbabilityOfN(int n);
+            void printProbabilityOfNPlus(int n);
         private:
             void computeRes(int* res, int n, int cot);
     };

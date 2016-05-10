@@ -2,10 +2,21 @@
 #include <string.h>
 #include "mianshiti.h"
 using namespace std;
+int main45(){
+    jzOffer::Ti45 test;
+    cout<<test.lastRemaining(0, 1)<<endl;
+}
+
+int main44(){
+    jzOffer::Ti44 test;
+    int a[]={3,4,6,7,14};
+    cout<<test.isSequence(a)<<endl;
+}
 
 int main43(){
     jzOffer::Ti43 test;
-    test.printProbabilityOfN(1);
+    //test.printProbabilityOfN(3);
+    test.printProbabilityOfNPlus(3);
 }
 
 int main42(){
@@ -202,5 +213,5 @@ int main6()
 }
 
 int main(){
-    main43();
+    main44();
 }

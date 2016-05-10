@@ -4,7 +4,69 @@
 #include <memory.h>
 #include <utility>
 #include <math.h>
+#include <list>
 using namespace jzOffer;
+
+/**
+    0到n-1这n个数字排成环状，从0开始，删除第m个数字，求最后剩余的数字
+
+    思路：
+    1.基于使用stl list模拟循环链表的实现
+
+    std的list的使用：
+    1.list<T>::iterator只支持++或--，不支持+N
+    2.erase返回最后一个被删元素的下一个元素的迭代器
+    3.迭代器都支持*，有些编译器迭代器就是指针
+**/
+#define AFTERMTI45(nums, m, bit) \
+{                                   \
+    for(int i(0); i<m; ++i)         \
+        if(++bit == nums.end())     \
+            bit=nums.begin();       \
+}
+
+int Ti45::lastRemaining(int n, int m){
+    if(n<1)return -1;
+    list<int> nums;
+    for(int i(0); i<n; ++i)nums.insert(nums.end(), i);
+    list<int>::iterator it=nums.begin();
+    //list<int>::iterator tmp=nums.begin();
+    while(nums.size()>1){
+        AFTERMTI45(nums, m, it);
+      //  AFTERMTI45(nums, it, 1, tmp);
+        it=nums.erase(it);
+        //it=tmp;
+        if(it==nums.end())
+            it=nums.begin();
+    }
+    return *nums.begin();
+}
+
+
+/**
+    判断五张牌是否是顺子，大小王可以充当任何一张牌, 大王用14小王用15表示
+
+    思路：
+    1.用一个数组存储各个牌的计数，遍历一遍，计算从第一个有牌的位置到后四张牌范围内有牌的
+    位置总数，加上大小王数是否为5，相比下个思路更加简洁；
+    2.对数组排序，统计大小王的个数，再统计非大小王的牌的空缺数，再判断是否有对子，，貌似蛮繁琐
+**/
+bool Ti44::isSequence(int* s){
+    if(s==nullptr)return false;
+    int res[16];
+    memset(res, 0, sizeof(int)*16);
+    /**/for(int i(0); i<5; ++i)++res[s[i]-'0'];/**ACSII码 0-9！！ 不存在你想要的‘14’**/
+    for(int i(0); i<5; ++i)++res[s[i]];
+    int flag(0), sc(0);
+    for(int i(1); i<=15; ++i)
+        if(res[i]==1 && flag<5)
+            ++flag, ++sc;
+        else if(flag>=1 &&flag<5)
+                ++flag;
+    if(sc+res[14]+res[15]==5)
+        return true;
+    return false;
+}
 
 /**建模（数据结构+方法（内在规律））
     投掷n个骰子，求出其s的可能值及出现的概率
@@ -15,9 +77,52 @@ using namespace jzOffer;
     1.1.没有必要存储全排列的结果，保存和s的次数便可以
     1.2.此情况下，基于递归的实现，函数栈的消耗不是问题，主要是有6的n次
     调用，效率问题，，
-    2.**用一个数组保存n-1的s的情况，另外一个数组保存n的s的情况，后者可以
-    由前者直接肌酸得到
+    2.**使用两个6n大小的数组，轮流保存从1到n个股子的和s，例如，第二个股子
+    s=8的值是只有一个股子时，s=2到7的累加；
+
+    注意：简单的宏可以用逗号连接表达式，如下的宏用了{}，便不能再用逗号连接了
 **/
+#define GETVALTi43(r, j, tmp)     \
+{   for(int k(1); k<=6; ++k)     \
+        if(j-k >=1)\
+            tmp+=r[j-k];\
+}
+
+void Ti43::printProbabilityOfNPlus(int n){
+    if(n<1)return;
+    /**可以使用一个二维数组，然后用flag来选择每轮更新哪个数组，及最后打印哪个数组，减少代码量**/
+    int* r1=new int[6*n+1];
+    int* r2=new int[6*n+1];
+    memset(r1, 0, sizeof(int)*(6*n+1));
+    memset(r2, 0, sizeof(int)*(6*n+1));
+    for(int i(1); i<=6; ++i)r1[i]=1;
+
+    int tmp(0);
+    for(int i(2); i<=n; ++i){
+        if(i%2==0)
+            for(int j(i); j<=6*i; ++j){
+                GETVALTi43(r1, j, tmp);
+                r2[j]=tmp, tmp=0;
+            }
+        else
+            for(int j(i); j<=6*i; ++j){
+                GETVALTi43(r2, j, tmp);
+                r1[j]=tmp, tmp=0;
+            }
+    }
+    float total(6*n);
+    if(n%2==1)
+        for(int i(n); i<=6*n; ++i)
+            printf("%d %f\n", i, r1[i]/total);
+    else
+        for(int i(n); i<=6*n; ++i)
+            printf("%d %f\n", i, r2[i]/total);
+
+    delete[] r1;
+    delete[] r2;/**new and delete**/
+}
+
+
 void Ti43::printProbabilityOfN(int n){
     if(n<1)return;
     //char* res=new char[pow(6,n)];
