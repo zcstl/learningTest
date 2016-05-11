@@ -8,6 +8,69 @@
 using namespace jzOffer;
 
 /**
+    不用加减乘除坐加法
+
+**/
+int Ti47::mutiAandB(int a, int b){
+
+}
+
+/**
+    计算1到n个数字的和，不能使用乘除和循环语句，也不能使用分支语句和条件表达式
+
+    思路：
+    1.使用goto代替循环语句，使用一个长为n的字符串代替条件判断
+    1.1.goto identifier，该标识符不能是变量！！仅仅是标识符，没有‘内存’
+
+    2.构造函数，A* a=new A[N];类A的构造函数被执行N次
+    3.虚函数或函数指针， !!非零值为1， !!0的结果为0， 从而决定执行哪个函数
+    4.模板实现
+
+    细节：类成员为函数指针数组,指向成员函数这部分，调试了很久才通过，有时间再深入学习下
+**/
+
+void(* Ti46::pToFunc[2])(void)={&Ti46::func0, &Ti46::func1};
+int Ti46::cot(0);
+int Ti46::total(0);//定义静态成员变量时不能加static
+int Ti46::oneToN(int n){
+    if(n<0)return -1;
+    cot=n;
+    total=0;
+    func1();
+    return total;
+}
+void Ti46::func1(){
+    total+=cot--;
+    pToFunc[!!cot]();
+}
+void Ti46::func0(){
+    return;
+}
+
+
+/*
+int Ti46::oneToN(int n){
+    if(n<0)return -1;
+    char** res=new char*[n];
+    for(int i(0); i<n; ++i){
+        res[i]= new char[2];
+        res[i][1]='\0';
+        if(n<n-1)
+            res[i][0]='t';
+        else
+            res[i][0]='T';
+    }
+    int total(0), i(0);
+    t:
+    total+=++i;
+    goto res[i-1];
+    T:
+    return total;
+
+}
+*/
+
+/**
     0到n-1这n个数字排成环状，从0开始，删除第m个数字，求最后剩余的数字
 
     思路：

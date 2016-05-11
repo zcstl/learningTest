@@ -46,6 +46,23 @@ namespace jzOffer{
 
     };
 
+    class Ti47{
+        public:
+            int mutiAandB(int a, int b);
+    };
+
+    class Ti46{
+        public:
+            Ti46(){}
+            int oneToN(int n);
+        private:
+            static void func0();
+            static void func1();
+            static int cot;
+            static int total;
+            static void(* pToFunc[2])(void);
+    };
+
     class Ti45{
         public:
             int lastRemaining(int n, int m);

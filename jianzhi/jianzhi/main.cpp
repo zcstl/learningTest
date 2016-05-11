@@ -2,6 +2,11 @@
 #include <string.h>
 #include "mianshiti.h"
 using namespace std;
+int main46(){
+    jzOffer::Ti46 test;
+    cout<<test.oneToN(5)<<endl;
+}
+
 int main45(){
     jzOffer::Ti45 test;
     cout<<test.lastRemaining(0, 1)<<endl;
@@ -213,5 +218,5 @@ int main6()
 }
 
 int main(){
-    main44();
+    main46();
 }
